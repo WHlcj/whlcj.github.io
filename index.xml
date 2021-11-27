@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>来自缤纷多彩的灰</title>
-    <link>http://example.org/</link>
+    <link>https://whlcj.github.io/</link>
     <description>Recent content on 来自缤纷多彩的灰</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Nov 2021 12:55:06 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Nov 2021 12:55:06 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>我的第一篇博客！</title>
-      <link>http://example.org/posts/test/</link>
+      <link>https://whlcj.github.io/posts/test/</link>
       <pubDate>Fri, 26 Nov 2021 12:55:06 +0800</pubDate>
       
-      <guid>http://example.org/posts/test/</guid>
-      <description>经过两天的不懈努力，终于迎来了曙光！ohhhhhh！ 首先感谢iflab导师们和闫yx学长给予的帮助!一定是老天眷顾我，才让我一路上能遇到很多</description>
+      <guid>https://whlcj.github.io/posts/test/</guid>
+      <description>经过两天的不懈努力，终于迎来了曙光！ohhhhhh！ 首先感谢iflab导师们和闫wx学长给予的帮助!一定是老天眷顾我，才让我一路上能遇到很多</description>
     </item>
     
   </channel>
