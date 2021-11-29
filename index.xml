@@ -6,7 +6,30 @@
     <description>Recent content on 来自缤纷多彩的灰</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Nov 2021 12:55:06 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Nov 2021 20:56:31 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Historical_modification</title>
+      <link>https://whlcj.github.io/posts/historical_modification/</link>
+      <pubDate>Mon, 29 Nov 2021 20:56:31 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/historical_modification/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;这里是一些我对搭建博客的探索记录:&lt;/strong&gt;&lt;br&gt;
+*11月25日：*搭建好了第一个博客，感觉很low于是放弃了&lt;br&gt;
+*11月26日：*开始探索其他主主题，最终选择了dream主题&lt;br&gt;
+*11月27日：*简单探索了dream主题基本的使用方法，做了一些很简单的修改，并且上传了第一篇博客&lt;br&gt;
+具体的修改有：1.换了背景图片&lt;br&gt;
+              2.更换了一批单篇文章的图片&lt;br&gt;
+&lt;em&gt;11月28日：&lt;em&gt;开始走上个性化主题美化的道路但是，too young too naive!搞了很久，有了一定的突破：&lt;br&gt;
+              1.修改了左上角以及背面图标的颜色来适应新背景图&lt;br&gt;
+              2.修改了title颜色
+              3.修改了bottom两个链接文字的颜色
+              4.完善了主页的HOME键和SEARCH键
+&lt;em&gt;11月29日：&lt;/em&gt;
+              1.创建了新的一篇博客&lt;br&gt;
+              2.修改了主页的部分文字颜色和大小
+              3.修改了三个小图标的颜色&lt;/em&gt;11月29日：&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>我的第一篇博客！</title>
       <link>https://whlcj.github.io/posts/test/</link>
