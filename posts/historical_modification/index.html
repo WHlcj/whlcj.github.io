@@ -79,6 +79,8 @@
 
 
 
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
 
 
 
@@ -178,7 +180,10 @@
 <em>11月29日：</em>
    1.创建了新的一篇博客<br>
               2.修改了主页的部分文字颜色和大小<br>
-              3.修改了三个小图标的颜色</p>
+              3.修改了三个小图标的颜色<br>
+<em>12月1日：</em>
+    1.增加了评论功能<br>
+              2.跟换了部分图片</p>
 
       </article>
     </section>
@@ -187,6 +192,19 @@
 
     
 
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
     
   </div>
 </div>

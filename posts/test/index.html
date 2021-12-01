@@ -79,6 +79,8 @@
 
 
 
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
 
 
 
@@ -185,6 +187,19 @@
 
     
 
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
     
   </div>
 </div>
