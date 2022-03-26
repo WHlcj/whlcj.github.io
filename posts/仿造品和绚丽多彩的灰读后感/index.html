@@ -77,7 +77,7 @@
 
 
 
-<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css" />
+<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/gruvbox-dark.min.css" />
 
 
 
@@ -87,6 +87,8 @@
 
 
 
+    
+    <link rel="stylesheet" href="/css/custom.css" />
     
   </head>
 
@@ -244,6 +246,10 @@
     
       
     
+      
+    
+      
+    
     
 
     
@@ -257,6 +263,18 @@
           
             <a class="ui label" href="/tags/hugo/" title="hugo">
               hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
             </a>
           
           
@@ -420,8 +438,8 @@
     var isDark = localStore.getItem('hugo-theme-dream-is-dark')
     isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
 
-    var lightTheme =  null 
-    var darkTheme = "gruvbox-dark"
+    var lightTheme = "gruvbox-dark"
+    var darkTheme =  null 
     var theme = isDark === 'y' ? darkTheme : lightTheme
 
     $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
