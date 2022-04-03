@@ -194,7 +194,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期六，三月 26 日，2022 年
+        
+          <span data-format="luxon">2022-03-26T14:18:54&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -225,7 +227,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期一，一月 24 日，2022 年
+        
+          <span data-format="luxon">2022-01-24T22:59:29&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -257,7 +261,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期一，一月 17 日，2022 年
+        
+          <span data-format="luxon">2022-01-17T09:15:05&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -288,7 +294,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期一，十一月 29 日，2021 年
+        
+          <span data-format="luxon">2021-11-29T20:56:31&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -319,7 +327,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期五，十一月 26 日，2021 年
+        
+          <span data-format="luxon">2021-11-26T12:55:06&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -567,6 +577,21 @@
 <script src="/js/theme.js"></script>
 
     
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
 
 
 

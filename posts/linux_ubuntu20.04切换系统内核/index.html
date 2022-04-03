@@ -150,9 +150,7 @@
               
 
               | 
-                  
-                    星期六，三月 26 日，2022 年
-                  
+                  <span data-format="luxon">2022-03-26T14:18:54&#43;08:00</span>
                 
 
               | 2 分钟阅读
@@ -160,9 +158,7 @@
               
               | 更新于
                 
-                  
-                    星期六，三月 26 日，2022 年
-                  
+                  <span data-format="luxon">2022-03-26T14:18:54&#43;08:00</span>
                 
               
             </span>
@@ -192,58 +188,154 @@
 <h2 id="前言">前言</h2>
 <p>本教程是本人在目前网上不断查找资料试错总结出来的一种可行的方法，举例VM下linux ubuntu20.04切换系统内核5.13.0-37切换至5.4.0-65内核，但是切换方法可通用任何内核版本，话不多说咱们直接开始。</p>
 <h2 id="一检查当前的内核版本">一.检查当前的内核版本</h2>
-<pre tabindex="0"><code> 1. #输入命令
- 2. uname -r
-</code></pre><img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/21bb8003630774f5e0e0311528f74a1.jpg">  
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> #输入命令
+uname -r
+</code></pre></td></tr></table>
+</div>
+</div><img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/21bb8003630774f5e0e0311528f74a1.jpg">  
 <p>这里我系统原本的内核版本为<font color="#990000"><strong>5.13.0-37-generic</strong></font>.</p>
 <h2 id="二下载指定的内核版本">二.下载指定的内核版本</h2>
 <p>读者可通过<font color="#990000"><strong><a href="http://ftp.sjtu.edu.cn/sites/ftp.kernel.org/pub/linux/kernel/v5.x/">http://ftp.sjtu.edu.cn/sites/ftp.kernel.org/pub/linux/kernel/v5.x/</a></strong></font>查找自己想要的版本。这里我需要更换为<font color="#990000"><strong>5.4.0-65-generic</strong></font>所以输入命令：</p>
-<pre tabindex="0"><code>1. sudo apt-get install linux-image-5.4.0-65-generic
-2. sudo apt-get install linux-headers-5.4.0-65-generic
-</code></pre><p>这里可能会出现如下报错信息：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt-get install linux-image-5.4.0-65-generic
+sudo apt-get install linux-headers-5.4.0-65-generic
+</code></pre></td></tr></table>
+</div>
+</div><p>这里可能会出现如下报错信息：</p>
 <img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/b6db3a01884ab6cf84dc3b8cf2c4c6f.png">
 只需先升级软件源再重新下载即可:     
-<pre tabindex="0"><code>1.# 输入指令
-2.sudo apt-get update
-</code></pre><p>由于不同平台以及虚拟机设置不同，这里有可能一部分幸运儿已经更换了内核，那么只需再输入重启指令就可以更换成功：</p>
-<pre tabindex="0"><code>1.# 重启指令
-2.reboot
-</code></pre><p>再次查询版本，检查是否成功.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 输入指令
+sudo apt-get update
+</code></pre></td></tr></table>
+</div>
+</div><p>由于不同平台以及虚拟机设置不同，这里有可能一部分幸运儿已经更换了内核，那么只需再输入重启指令就可以更换成功：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 重启指令
+reboot
+</code></pre></td></tr></table>
+</div>
+</div><p>再次查询版本，检查是否成功.</p>
 <h2 id="三查找想切换的内核">三.查找想切换的内核</h2>
-<pre tabindex="0"><code>1.#输入指令
-2.grep gnulinux /boot/grub/grub.cfg
-</code></pre><p>返回结果如下图，这里我想切换的版本是刚下载下来的5.4.0-65-generic这个根据你们想要的版本选择，复制下第二个蓝色框框的内容，这是你要升级的内核版本，蓝色方框是<font color="#006600"><strong>跟步骤一里查找的内核一致的</strong></font>，注意不要选择recovery模式的.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#输入指令
+grep gnulinux /boot/grub/grub.cfg
+</code></pre></td></tr></table>
+</div>
+</div><p>返回结果如下图，这里我想切换的版本是刚下载下来的5.4.0-65-generic这个根据你们想要的版本选择，复制下第二个蓝色框框的内容，这是你要升级的内核版本，蓝色方框是<font color="#006600"><strong>跟步骤一里查找的内核一致的</strong></font>，注意不要选择recovery模式的.</p>
 <img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/dd05d66c591245aea8ea9ce8d8834c3.png">  
 <p>根据两个蓝色方框部分得到的内核字符串组合，以留备用：
 gnulinux-advanced-2c486937-4aae-40f9-8a2d-796d41497f32&gt;gnulinux-5.4.0-65-generic-advanced-d4acfbf9-2b86-445e-b049-53c6446aaf5e</p>
 <p><em><strong>注意将原内核字符串的simple改为advanced，两个字符串中间加上一个 &ldquo;&gt;&quot;</strong></em></p>
 <h2 id="修改配置文件">修改配置文件</h2>
-<pre tabindex="0"><code>1.#输入指令
-2.sudo gedit /etc/default/grub
-</code></pre><p>将下图原为 GRUB_DEFALUT=0替换为刚组合的字符串即可
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#输入指令
+sudo gedit /etc/default/grub
+</code></pre></td></tr></table>
+</div>
+</div><p>将下图原为 GRUB_DEFALUT=0替换为刚组合的字符串即可
 <img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/2e0c8ae12de6d6cbea60249c3297e58.png"></p>
 <p>然后点save保存</p>
 <h2 id="更新grub">更新grub：</h2>
-<pre tabindex="0"><code>1.#输入指令
-2.sudo update-grub
-</code></pre><p>更新完之后，重启虚拟机</p>
-<pre tabindex="0"><code>1.#输入指令
-2.reboot
-</code></pre><p>重启后再次检查内核</p>
-<pre tabindex="0"><code>1.#输入指令
-2.uname -r
-</code></pre><p>切换成功：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#输入指令
+sudo update-grub
+</code></pre></td></tr></table>
+</div>
+</div><p>更新完之后，重启虚拟机</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#输入指令
+reboot
+</code></pre></td></tr></table>
+</div>
+</div><p>重启后再次检查内核</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#输入指令
+uname -r
+</code></pre></td></tr></table>
+</div>
+</div><p>切换成功：</p>
 <img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/6d5e16a760c8da1f7e95d9ff9cc73fa.png">  
 <h2 id="删除多余版本根据需要选择参考">删除多余版本(根据需要，选择参考)</h2>
 <p>若读者想要清除系统内多余的内核版本，可参考以下步骤.</p>
-<pre tabindex="0"><code>1.查看系统里面的内核
-2.dpkg --get-selections |grep linux
-</code></pre><img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/1f37b8e7bc74d63a2bc187cac1b6bba.png">
-<pre tabindex="0"><code>1.删除内核
-2.sudo apt-get remove linux-xxxxxxxx
-</code></pre><pre tabindex="0"><code>1.清除空文件夹
-2.sudo apt-get purge linux-xxxxxxxx
-</code></pre>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">查看系统里面的内核
+dpkg --get-selections |grep linux
+</code></pre></td></tr></table>
+</div>
+</div><img src="https://picgo-1309343237.cos.ap-beijing.myqcloud.com/1f37b8e7bc74d63a2bc187cac1b6bba.png">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">删除内核
+sudo apt-get remove linux-xxxxxxxx
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">清除空文件夹
+sudo apt-get purge linux-xxxxxxxx
+</code></pre></td></tr></table>
+</div>
+</div>
       </article>
     </section>
 
@@ -490,6 +582,21 @@ gnulinux-advanced-2c486937-4aae-40f9-8a2d-796d41497f32&gt;gnulinux-5.4.0-65-gene
 <script src="/js/theme.js"></script>
 
     
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
 
 
 

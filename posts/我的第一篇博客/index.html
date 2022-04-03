@@ -130,9 +130,7 @@
               
 
               | 
-                  
-                    星期五，十一月 26 日，2021 年
-                  
+                  <span data-format="luxon">2021-11-26T12:55:06&#43;08:00</span>
                 
 
               | 3 分钟阅读
@@ -140,9 +138,7 @@
               
               | 更新于
                 
-                  
-                    星期五，十一月 26 日，2021 年
-                  
+                  <span data-format="luxon">2021-11-26T12:55:06&#43;08:00</span>
                 
               
             </span>
@@ -428,6 +424,21 @@
 <script src="/js/theme.js"></script>
 
     
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
 
 
 

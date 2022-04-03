@@ -194,7 +194,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        星期一，一月 24 日，2022 年
+        
+          <span data-format="luxon">2022-01-24T22:59:29&#43;08:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -438,6 +440,21 @@
 <script src="/js/theme.js"></script>
 
     
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
 
 
 
