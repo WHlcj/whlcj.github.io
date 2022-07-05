@@ -42,7 +42,8 @@
 <link rel="stylesheet" href= "/css/semantic.min.css">
 <link rel="stylesheet" href="/css/icomoon.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
 <link rel="stylesheet" href="/css/site.css" />
 
 <style>
@@ -71,10 +72,6 @@
 
 
     
-
-
-
-<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/gruvbox-dark.min.css" />
 
 
 
@@ -148,7 +145,7 @@
                   <span data-format="luxon">2021-11-29T20:56:31&#43;08:00</span>
                 
 
-              | 2 分钟阅读
+              | 3 分钟阅读
 
               
               | 更新于
@@ -187,7 +184,7 @@
 具体的修改有：1.换了背景图片<br>
               2.更换了一批单篇文章的图片<br>
 <em>11月28日：</em>  开始走上个性化主题美化的道路但是，too young too naive!搞了很久，有了一定的突破：<br>
-              1.修改了左上角以及背面图标的颜色来适应新背景图 <br>
+              1.修改了左上角以及背面图标的颜色来适应新背景图<br>
               2.修改了title颜色<br>
               3.修改了bottom两个链接文字的颜色<br>
               4.完善了主页的HOME键和SEARCH键<br>
@@ -206,7 +203,8 @@
               2.将语言换为了中文<br>
 <em>1月24日：</em>
     1.修改了部分错别字<br>
-              2.设置了图片style，解决了手机上图片超出屏幕问题（semantic.min.css 19）<br>
+              2.设置了图片style，解决了手机上图片超出屏幕问题:<br>
+              （semantic.min.css 19&mdash;img{max-width:100%;height:auto;}）<br>
 *2月9日：*重大突破！由于之前一直模仿的作者换了主题，不得以自己去原主题作者这里探索主题美化，收获颇丰！<br>
               1.给每篇文章左下角加上了小头像<br>
               2.微调了config.toml配置<br>
@@ -214,7 +212,20 @@
               4.在纠结更换主页头像<br>
               5.增加了一个网页图标（但是不是很满意，以后会改）<br>
 <em>4月2日：</em><br>
-    1.修改了部分配置选项，开启了js高亮，解决了markdown下代码块显示的问题</p>
+              1.修改了部分配置选项，开启了js高亮，解决了markdown下代码块显示的问题<br>
+*5月7日:*重大更新！摸清了以前的几乎所有问题并重新修改了源码<br>
+              1.左上图标颜色:.ui.menu .item<br>
+              2.headerTitle颜色:.ui.header <br>
+              3.headerTitle字体大小:.ui.medium.header<br>
+              4.motto:.ui.header .sub.header,<br>
+              5.主页卡片透明度:.ui.cards&gt;.card<br>
+              6.图标颜色:.ui.list&gt;a.item i.icon <br>
+              7.博客文章卡片透明度:.ui.segment<br>
+              8.博客文章字颜色:.markdown-body <br>
+              9.markdown引用块格式:.markdown-body blockquote<br>
+              10.搞懂并解决了之前markdown一直出的问题<br>
+              11.header部分:.dream-header<br>
+              ***下载了网络库,也搞清楚了自定义的方法，以后自定义会十分方便！</p>
       </article>
     </section>
 
@@ -480,28 +491,6 @@
 
 
 <script src="/js/scrollToTop.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
-
-
-
-<script>
-  hljs.highlightAll()
-  setHighlightTheme()
-
-  function setHighlightTheme() {
-    var isDark = localStore.getItem('hugo-theme-dream-is-dark')
-    isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
-
-    var lightTheme = "gruvbox-dark"
-    var darkTheme =  null 
-    var theme = isDark === 'y' ? darkTheme : lightTheme
-
-    $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
-    $('pre').css('background', isDark === 'y' ? '#333' : '')
-  }
-</script>
 
 
 
