@@ -691,23 +691,23 @@
 }
 
 .markdown-body h2 {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .markdown-body h3 {
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 .markdown-body h4 {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .markdown-body h5 {
-  font-size: .875em;
+  font-size: 1em;
 }
 
 .markdown-body h6 {
-  font-size: .85em;
+  font-size: .9em;
   color: #6a737d;
 }
 

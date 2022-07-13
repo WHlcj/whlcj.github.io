@@ -30,7 +30,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/%E4%BB%BF%E9%80%A0%E5%93%81%E5%92%8C%E7%BB%9A%E4%B8%BD%E5%A4%9A%E5%BD%A9%E7%9A%84%E7%81%B0%E8%AF%BB%E5%90%8E%E6%84%9F/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-24T22:59:29+08:00" />
-<meta property="article:modified_time" content="2022-01-24T22:59:29+08:00" />
+<meta property="article:modified_time" content="2022-04-03T22:58:40+08:00" />
 
 
 
@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
 <link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
 <link rel="stylesheet" href="/css/site.css" />
 
 <style>
@@ -119,6 +120,28 @@
   
 
   
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=%e6%88%91%ef%bc%8c%e4%bb%bf%e9%80%a0%e5%93%81&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f%25E4%25BB%25BF%25E9%2580%25A0%25E5%2593%2581%25E5%2592%258C%25E7%25BB%259A%25E4%25B8%25BD%25E5%25A4%259A%25E5%25BD%25A9%25E7%259A%2584%25E7%2581%25B0%25E8%25AF%25BB%25E5%2590%258E%25E6%2584%259F%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f%25E4%25BB%25BF%25E9%2580%25A0%25E5%2593%2581%25E5%2592%258C%25E7%25BB%259A%25E4%25B8%25BD%25E5%25A4%259A%25E5%25BD%25A9%25E7%259A%2584%25E7%2581%25B0%25E8%25AF%25BB%25E5%2590%258E%25E6%2584%259F%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
   <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
     <section class="ui top attached segment">
       <header>
@@ -138,23 +161,10 @@
               
               | 更新于
                 
-                  <span data-format="luxon">2022-01-24T22:59:29&#43;08:00</span>
+                  <span data-format="luxon">2022-04-03T22:58:40&#43;08:00</span>
                 
               
             </span>
-
-            
-            <span class="dream-share">
-  <a href="#" class="save-as-image" title="保存为图片" onclick="savePostAsImg()">
-    <i class="save icon"></i>
-  </a>
-  <a href="https://twitter.com/intent/tweet?text=%e6%88%91%ef%bc%8c%e4%bb%bf%e9%80%a0%e5%93%81&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f%25E4%25BB%25BF%25E9%2580%25A0%25E5%2593%2581%25E5%2592%258C%25E7%25BB%259A%25E4%25B8%25BD%25E5%25A4%259A%25E5%25BD%25A9%25E7%259A%2584%25E7%2581%25B0%25E8%25AF%25BB%25E5%2590%258E%25E6%2584%259F%2f" title="Twitter">
-    <i class="twitter icon"></i>
-  </a>
-  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f%25E4%25BB%25BF%25E9%2580%25A0%25E5%2593%2581%25E5%2592%258C%25E7%25BB%259A%25E4%25B8%25BD%25E5%25A4%259A%25E5%25BD%25A9%25E7%259A%2584%25E7%2581%25B0%25E8%25AF%25BB%25E5%2590%258E%25E6%2584%259F%2f" title="Facebook">
-    <i class="facebook icon"></i>
-  </a>
-</span>
 
             
           </span>
@@ -208,7 +218,7 @@
             <header class="ui basic very padded segment dream-header">
   
   <div class="ui small circular image">
-    <img src="/img/1274jjj.jpg" alt="avatar" />
+    <img src="/img/me.jpg" alt="avatar" />
   </div>
   
 
@@ -243,6 +253,8 @@
     
       
     
+      
+    
     
 
     
@@ -262,6 +274,12 @@
           
             <a class="ui label" href="/tags/linux/" title="linux">
               linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
             </a>
           
           
@@ -384,7 +402,7 @@
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 
-  window.fixedNav =  null 
+  window.fixedNav =  true 
 
   if (window.hasTwitterEmbed) {
     

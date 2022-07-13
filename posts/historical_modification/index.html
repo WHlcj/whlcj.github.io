@@ -28,7 +28,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/historical_modification/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-29T20:56:31+08:00" />
-<meta property="article:modified_time" content="2021-11-29T20:56:31+08:00" />
+<meta property="article:modified_time" content="2022-07-05T23:52:43+08:00" />
 
 
 
@@ -44,6 +44,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
 <link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
 <link rel="stylesheet" href="/css/site.css" />
 
 <style>
@@ -129,6 +130,22 @@
     
 
     
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=Historical_modification&url=https%3a%2f%2fwhlcj.github.io%2fposts%2fhistorical_modification%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2fhistorical_modification%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
   </aside>
   
   <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
@@ -150,23 +167,10 @@
               
               | 更新于
                 
-                  <span data-format="luxon">2021-11-29T20:56:31&#43;08:00</span>
+                  <span data-format="luxon">2022-07-05T23:52:43&#43;08:00</span>
                 
               
             </span>
-
-            
-            <span class="dream-share">
-  <a href="#" class="save-as-image" title="保存为图片" onclick="savePostAsImg()">
-    <i class="save icon"></i>
-  </a>
-  <a href="https://twitter.com/intent/tweet?text=Historical_modification&url=https%3a%2f%2fwhlcj.github.io%2fposts%2fhistorical_modification%2f" title="Twitter">
-    <i class="twitter icon"></i>
-  </a>
-  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2fhistorical_modification%2f" title="Facebook">
-    <i class="facebook icon"></i>
-  </a>
-</span>
 
             
           </span>
@@ -213,7 +217,7 @@
               5.增加了一个网页图标（但是不是很满意，以后会改）<br>
 <em>4月2日：</em><br>
               1.修改了部分配置选项，开启了js高亮，解决了markdown下代码块显示的问题<br>
-*5月7日:*重大更新！摸清了以前的几乎所有问题并重新修改了源码<br>
+*7月7日:*重大更新！摸清了以前的几乎所有问题并重新修改了源码<br>
               1.左上图标颜色:.ui.menu .item<br>
               2.headerTitle颜色:.ui.header <br>
               3.headerTitle字体大小:.ui.medium.header<br>
@@ -225,7 +229,12 @@
               9.markdown引用块格式:.markdown-body blockquote<br>
               10.搞懂并解决了之前markdown一直出的问题<br>
               11.header部分:.dream-header<br>
-              ***下载了网络库,也搞清楚了自定义的方法，以后自定义会十分方便！</p>
+              ***下载了网络库,也搞清楚了自定义的方法，以后自定义会十分方便！<br>
+<em>7月13日:</em><br>
+              1.翻阅了主题作者配置文档，添加了分享与移动导航功能<br>
+              2.右侧滑条改为了浅紫色:
+.os-theme-dark&gt;.os-scrollbar&gt;.os-scrollbar-track&gt;.os-scrollbar-handle<br>
+              3.作者主题帮助文档:https://g1en.site/hugo-theme-dream</p>
       </article>
     </section>
 
@@ -267,7 +276,7 @@
             <header class="ui basic very padded segment dream-header">
   
   <div class="ui small circular image">
-    <img src="/img/1274jjj.jpg" alt="avatar" />
+    <img src="/img/me.jpg" alt="avatar" />
   </div>
   
 
@@ -302,6 +311,8 @@
     
       
     
+      
+    
     
 
     
@@ -321,6 +332,12 @@
           
             <a class="ui label" href="/tags/linux/" title="linux">
               linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
             </a>
           
           
@@ -443,7 +460,7 @@
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 
-  window.fixedNav =  null 
+  window.fixedNav =  true 
 
   if (window.hasTwitterEmbed) {
     
