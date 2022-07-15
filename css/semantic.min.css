@@ -6198,11 +6198,11 @@
  }
 
  .ui.large.header {
-     font-size: 1.71428571em
+     font-size: 1.9rem
  }
 
  .ui.medium.header {
-     font-size: 1.8571429em
+     font-size: 1.9rem
  }
 
  .ui.small.header {
@@ -17189,7 +17189,7 @@
 
  .ui.segment,
  .ui.segments .segment {
-     font-size: 1.1rem;
+     font-size: 1.10rem;
  }
 
  .ui.large.segment,
