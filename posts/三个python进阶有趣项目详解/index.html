@@ -13,7 +13,7 @@
 
 
 <meta name="author" content="WHlcj" />
-<meta name="description" content="图片转字符画,生成随机验证码,qq群词云详解。代码可直接运行,小白也可直接上手
+<meta name="description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手
 " />
 
 
@@ -24,7 +24,7 @@
 
 
 <meta property="og:title" content="三个Python进阶有趣项目详解" />
-<meta property="og:description" content="图片转字符画,生成随机验证码,qq群词云详解。代码可直接运行,小白也可直接上手" />
+<meta property="og:description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/%E4%B8%89%E4%B8%AApython%E8%BF%9B%E9%98%B6%E6%9C%89%E8%B6%A3%E9%A1%B9%E7%9B%AE%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-14T10:32:57+08:00" />
@@ -35,7 +35,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="三个Python进阶有趣项目详解"/>
-<meta name="twitter:description" content="图片转字符画,生成随机验证码,qq群词云详解。代码可直接运行,小白也可直接上手"/>
+<meta name="twitter:description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手"/>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -198,11 +198,11 @@
       <article class="main">
         
 
-        <p><strong>图片转字符画,生成随机验证码,qq群词云详解。代码可直接运行,小白也可直接上手</strong></p>
+        <p><strong>图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手</strong></p>
 <blockquote>
 <p>小序</p>
 </blockquote>
-<p>本章中三个项目实例均采用我能找到的最简单并且有效的实现方法,相比网上容易找到的教程,少去了一些不必要的模块跟正则表达式等处理办法。在保证效率的同时使代码也更加整洁清晰。每个案例采取先给实现效果,然后给出完整源码和一些注释,最后分段详解。</p>
+<p>本章中三个项目实例均采用我能找到的最简单并且有效的实现方法，相比网上容易找到的教程，少去了一些不必要的模块跟正则表达式等处理办法。在保证效率的同时使代码也更加整洁清晰。每个案例采取先给实现效果，然后给出完整源码和一些注释，最后分段详解。</p>
 <blockquote>
 <p>一些说明:</p>
 </blockquote>
@@ -341,9 +341,9 @@ s <span style="color:#ff79c6">=</span> toCharImage(<span style="color:#f1fa8c">&
     <span style="color:#ff79c6">return</span> char
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>第2行:</strong> 定义字符集用来映射不同的灰度值。本例中使用三引号为了区别字符串中的单双引号,注意不要换行否则会在灰度转换时读入隐藏的换行符。
+</div><p><strong>第2行:</strong> 定义字符集用来映射不同的灰度值。本例中使用三引号为了区别字符串中的单双引号，注意不要换行否则会在灰度转换时读入隐藏的换行符。
 <strong>为了兼容更多的图片,取得更好的字符画效果我推荐allChar = &ldquo;@%#*+=-:. &ldquo;</strong><br>
-<strong>第3行:</strong> 得到映射后的字符。其中除以256防止allChar索引溢出(这里你也可以在合适的范围内设定除以略微更大的数,比如260或者262等等),或者len(allChar)-1。</p>
+<strong>第3行:</strong> 得到映射后的字符。其中除以256防止allChar索引溢出(这里你也可以在合适的范围内设定除以略微更大的数，比如260或者262等等)，或者len(allChar)-1。</p>
 <blockquote>
 <p>函数GraytoChar(gray)</p>
 </blockquote>
@@ -389,9 +389,9 @@ s <span style="color:#ff79c6">=</span> toCharImage(<span style="color:#f1fa8c">&
      <span style="color:#ff79c6">return</span> charImg
 </code></pre></td></tr></table>
 </div>
-</div><p>关于这个函数旁白注释已经写得很清楚了,读者理解代码后可自己根据需要修改4-7行代码</p>
+</div><p>关于这个函数旁白注释已经写得很清楚了，读者理解代码后可自己根据需要修改4-7行代码</p>
 <h2 id="生成随机验证码">生成随机验证码</h2>
-<p>开发中的小插件,上网冲浪时十分常见的东西,但也十分简单~</p>
+<p>开发中的小插件，上网冲浪时十分常见的东西，但也十分简单~</p>
 <blockquote>
 <p>实现效果:</p>
 </blockquote>
@@ -528,12 +528,12 @@ a <span style="color:#ff79c6">=</span> captcha()
 <strong>11~17行:</strong> 验证输入是否与验证码信息匹配</p>
 <p>读者理解后可自行对其进行修改并将其做为插件运用于需要的地方。</p>
 <h2 id="qq群词云">qq群词云</h2>
-<p>词云本身使用场景很广,但对于初学者特别是学生来讲,qq群词云无疑是最有趣的词云运用之一,本例也由此展开。但是值得说明的一点是qq群消息本身内容很多也很难处理,因此qq群词云并不是最简单的入门词云项目。</p>
+<p>词云本身使用场景很广，但对于初学者特别是学生来讲，qq群词云无疑是最有趣的词云运用之一，本例也由此展开。但是值得说明的一点是qq群消息本身内容很多也很难处理，因此qq群词云并不是最简单的入门词云项目。</p>
 <blockquote>
 <p>实现效果:</p>
 </blockquote>
 <p><img src="/imgs/python%E9%A1%B9%E7%9B%AE/3.png" alt="">
-(分别取自一个动漫群和一个机器人群,这里忘记设置最小字体了所以有点看不清出现频率低的词条)</p>
+(分别取自一个动漫群和一个机器人群，这里忘记设置最小字体了所以有点看不清出现频率低的词条)</p>
 <h3 id="完整源码">完整源码</h3>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -616,7 +616,7 @@ a <span style="color:#ff79c6">=</span> captcha()
                 <span style="color:#ff79c6">if</span> (tmp <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;2022&#34;</span>):
                     <span style="color:#ff79c6">continue</span>
                 tmp <span style="color:#ff79c6">=</span> word[<span style="color:#bd93f9">0</span>:<span style="color:#bd93f9">2</span>]
-                <span style="color:#ff79c6">if</span> (tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;/&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;@&#39;</span>):  <span style="color:#6272a4"># 过滤掉单独或开头发的图片和表情，例如[图片]，/滑稽xxxx</span>
+                <span style="color:#ff79c6">if</span> (tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;/&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;@&#39;</span>):  <span style="color:#6272a4"># 过滤掉单独或开头发的图片和表情,例如[图片]，/滑稽xxxx</span>
                     <span style="color:#ff79c6">continue</span>
                 newtext<span style="color:#ff79c6">.</span>append(word)
 <span style="color:#6272a4"># 将过滤后剩下的文字重新写入文件中去</span>
@@ -668,7 +668,7 @@ draw(cutTxt())                                              <span style="color:#
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>wordcloud是优秀的词云展示第三方库,其中包含matplotlib模块和numpy模块</strong></p>
-<p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库一般在python中我们会对Numpy进行缩写: import numpy as np , 因此后续中的np均指numpy。</p>
+<p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库一般在python中我们会对Numpy进行缩写: import numpy as np ， 因此后续中的np均指numpy。</p>
 <p>先在cmd中安装相关模块:</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -681,8 +681,8 @@ draw(cutTxt())                                              <span style="color:#
 </div><blockquote>
 <p>def cutTxt()</p>
 </blockquote>
-<p>此函数起获取需要的聊天消息范围的作用,过滤算法是本人基于文件读取是一行一行读取的原则写的,刻意没有使用网上千篇一律的正则表达式,目的是使代码简单易懂降低门槛。这里是把想要的消息记录写入到新创建的f2.txt中。<strong>怎么导出qq聊天消息,读者可自己网上查询。</strong></p>
-<p>其中1.txt,2.txt以及下文的1.jpg,1_wc.jpg读者都可自定义名字</p>
+<p>此函数起获取需要的聊天消息范围的作用，过滤算法是本人基于文件读取是一行一行读取的原则写的，刻意没有使用网上千篇一律的正则表达式，目的是使代码简单易懂降低门槛。这里是把想要的消息记录写入到新创建的f2.txt中。<strong>怎么导出qq聊天消息，读者可自己网上查询。</strong></p>
+<p>其中1.txt，2.txt以及下文的1.jpg，1_wc.jpg读者都可自定义名字</p>
 <blockquote>
 <p>def draw(file)</p>
 </blockquote>
@@ -712,13 +712,13 @@ draw(cutTxt())                                              <span style="color:#
         font_path<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;C</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">Windows</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">simfang.ttf&#34;</span>)                <span style="color:#6272a4"># 设置字体格式,默认不支持中文,字体在此路径自选</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>此函数则是把过滤后的txt文件提取并生成词云图片。这里对wordcloud.WordCloud需要说明的是其实这个函数可自定义的参数很多,这里只列举了几个常用的参数。</p>
+</div><p>此函数则是把过滤后的txt文件提取并生成词云图片。这里对wordcloud.WordCloud需要说明的是其实这个函数可自定义的参数很多，这里只列举了几个常用的参数。</p>
 <p>其中我这里使用的mask的1.jpg是一下这个♥:</p>
 <p><img src="/imgs/python%E9%A1%B9%E7%9B%AE/4.png" alt=""></p>
 <p><strong>其中font_path需要要的系统自带字体选择路径如下所示:</strong>
 <img src="/imgs/python%E9%A1%B9%E7%9B%AE/5.png" alt="">
 <img src="/imgs/python%E9%A1%B9%E7%9B%AE/6.png" alt="">
-找到你想要的字体后,右键查看名称,复制下来就行。</p>
+找到你想要的字体后，右键查看名称，复制下来就行。</p>
       </article>
     </section>
 
