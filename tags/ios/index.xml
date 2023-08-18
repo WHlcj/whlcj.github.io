@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iOS on 来自缤纷多彩的灰</title>
+    <link>https://whlcj.github.io/tags/ios/</link>
+    <description>Recent content in iOS on 来自缤纷多彩的灰</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a rel= &#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。转载请注明原文地址及作者。</copyright>
+    <lastBuildDate>Fri, 18 Aug 2023 00:00:11 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Xcode打包App分发提交问题汇总</title>
+      <link>https://whlcj.github.io/posts/2023/xcode_to_appstore/</link>
+      <pubDate>Fri, 18 Aug 2023 00:00:11 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/xcode_to_appstore/</guid>
+      <description>&lt;p&gt;持续更新遇到的相关问题和解决方案&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CCCC竞赛（二）</title>
+      <link>https://whlcj.github.io/posts/2023/cccc_two/</link>
+      <pubDate>Wed, 12 Jul 2023 17:30:55 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/cccc_two/</guid>
+      <description>&lt;p&gt;先说结果吧&amp;mdash;&amp;mdash;华北赛区🥈但是也仅此而已。。。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SwiftUI NavigationStack Guide</title>
+      <link>https://whlcj.github.io/posts/2023/navigationstack_guide/</link>
+      <pubDate>Wed, 05 Jul 2023 15:08:03 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/navigationstack_guide/</guid>
+      <description>&lt;p&gt;介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址&lt;a href=&#34;https://github.com/WHlcj/IOS-Practice/tree/main/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/NavigationStackDemo&#34;&gt;在这里&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SwiftUI处理十六进制颜色</title>
+      <link>https://whlcj.github.io/posts/2023/deal_hex_color/</link>
+      <pubDate>Sat, 17 Jun 2023 01:48:47 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/deal_hex_color/</guid>
+      <description>&lt;p&gt;由于Apple官方并没有在SwiftUI中给出十六色处理接口,这里介绍两种十六色处理方法.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IOS项目中添加外部字体</title>
+      <link>https://whlcj.github.io/posts/2023/fontfamily_to_project/</link>
+      <pubDate>Thu, 15 Jun 2023 00:51:20 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/fontfamily_to_project/</guid>
+      <description>&lt;p&gt;给出UIkit和SwiftUI两种框架工程的示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2023WWDC之夜(北京场)</title>
+      <link>https://whlcj.github.io/posts/2023/wwdc_night/</link>
+      <pubDate>Wed, 07 Jun 2023 14:42:00 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/wwdc_night/</guid>
+      <description>&lt;p&gt;很有意思的聚会，明年我还来！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IOS_Hackathon</title>
+      <link>https://whlcj.github.io/posts/2023/ios_hackathon/</link>
+      <pubDate>Mon, 22 May 2023 11:14:52 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/ios_hackathon/</guid>
+      <description>&lt;p&gt;人生第一次主动通宵，珍贵且难忘的回忆，大家都很棒！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WWDC竞赛（一）</title>
+      <link>https://whlcj.github.io/posts/2023/wwdc/</link>
+      <pubDate>Fri, 28 Apr 2023 01:07:28 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/wwdc/</guid>
+      <description>&lt;p&gt;介绍iOS方向最牛逼的赛事，以及个人认识与准备过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CCCC竞赛（一）</title>
+      <link>https://whlcj.github.io/posts/2023/cccc_one/</link>
+      <pubDate>Fri, 28 Apr 2023 00:45:55 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/cccc_one/</guid>
+      <description>&lt;p&gt;简单介绍iOS方向的国内主要赛事，以及分享个人参赛以及准备经验&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iOS开发入门</title>
+      <link>https://whlcj.github.io/posts/2023/begin_with_ios/</link>
+      <pubDate>Fri, 04 Nov 2022 23:55:24 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/begin_with_ios/</guid>
+      <description>&lt;p&gt;总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————&lt;strong&gt;本入门篇持续更新中！（2023.4.28）&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

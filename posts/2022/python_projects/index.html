@@ -1,0 +1,1188 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>三个Python进阶有趣项目详解 | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2022/python_projects/" />
+
+
+<meta property="og:title" content="三个Python进阶有趣项目详解" />
+<meta property="og:description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2022/python_projects/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-14T10:32:57+08:00" />
+<meta property="article:modified_time" content="2023-07-13T13:36:28+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="三个Python进阶有趣项目详解"/>
+<meta name="twitter:description" content="图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#图片转字符画">图片转字符画</a>
+      <ul>
+        <li><a href="#1完整源码">1.完整源码</a></li>
+        <li><a href="#2分段解析">2.分段解析</a></li>
+      </ul>
+    </li>
+    <li><a href="#生成随机验证码">生成随机验证码</a>
+      <ul>
+        <li><a href="#1完整源码-1">1.完整源码</a></li>
+        <li><a href="#2分段解析-1">2.分段解析</a></li>
+      </ul>
+    </li>
+    <li><a href="#qq群词云">qq群词云</a>
+      <ul>
+        <li><a href="#完整源码">完整源码</a></li>
+        <li><a href="#分段解析">分段解析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=%e4%b8%89%e4%b8%aaPython%e8%bf%9b%e9%98%b6%e6%9c%89%e8%b6%a3%e9%a1%b9%e7%9b%ae%e8%af%a6%e8%a7%a3&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fpython_projects%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fpython_projects%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">三个Python进阶有趣项目详解<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2022-07-14T10:32:57&#43;08:00</span>
+                
+
+              | 8 分钟阅读
+
+              
+              | 更新于
+                
+                  <span data-format="luxon">2023-07-13T13:36:28&#43;08:00</span>
+                
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p><strong>图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手</strong></p>
+<blockquote>
+<p>小序</p>
+</blockquote>
+<p>本章中三个项目实例均采用我能找到的最简单并且有效的实现方法，相比网上容易找到的教程，少去了一些不必要的模块跟正则表达式等处理办法。在保证效率的同时使代码也更加整洁清晰。每个案例采取先给实现效果，然后给出完整源码和一些注释，最后分段详解。</p>
+<blockquote>
+<p>一些说明:</p>
+</blockquote>
+<ul>
+<li>
+<p>本教程针对三个项目分别给出代码及其详解,前两个示例代码均可直接使用,只需修改待处理的文件路径或参数,qq群词云需要先导入qq群消息。</p>
+</li>
+<li>
+<p>有python基础的同学可以根据本文档分别对三个项目代码做出自己的个性化修改,从而产生更符合你需求的插件。</p>
+</li>
+<li>
+<p>案例中涉及的模块,建议用vpn下载,不然下载很慢。</p>
+<p><strong>Let&rsquo;s go!</strong></p>
+</li>
+</ul>
+<h2 id="图片转字符画">图片转字符画</h2>
+<p>很有意思的小玩意,适合装逼搞怪~</p>
+<blockquote>
+<p>实现效果:</p>
+</blockquote>
+<p><img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/1.png" alt=""></p>
+<blockquote>
+<p>原理</p>
+</blockquote>
+<p>字符画:一种由字母、标点、汉字或其他字符组成的图画，字符画通常利用占用不同数量像素的字符代替图画上不同明暗的点。<br>
+所以运用python将图片转化为字符画,其实质先将图片转换为灰度图,然后用定义好的字符集映射不同的灰度值。不多说,先上代码！</p>
+<h3 id="1完整源码">1.完整源码</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> PIL <span style="color:#ff79c6">import</span> Image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 将一个灰度值转换成对应的字符</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">GraytoChar</span>(gray):
+</span></span><span style="display:flex;"><span>    allChar <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;&#34;@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">[]?-_+~&lt;&gt;i!lI;:,&#34;^`&#39; &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    char <span style="color:#ff79c6">=</span> allChar[<span style="color:#8be9fd;font-style:italic">int</span>(<span style="color:#8be9fd;font-style:italic">len</span>(allChar)<span style="color:#ff79c6">*</span>gray<span style="color:#ff79c6">/</span><span style="color:#bd93f9">256</span>)]                       
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> char
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 将真彩色图像转换成字符画，真彩色图像文件路径为path</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">toCharImage</span>(path):
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> Image<span style="color:#ff79c6">.</span>open(path)
+</span></span><span style="display:flex;"><span>    ow, oh <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>size                                                       <span style="color:#6272a4"># 原始图像的宽和高,img.size返回的是一个元组</span>
+</span></span><span style="display:flex;"><span>    w <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100</span>                                                                 <span style="color:#6272a4"># 调整后的宽度（即字符画每行有w个字符）</span>
+</span></span><span style="display:flex;"><span>    h <span style="color:#ff79c6">=</span> w <span style="color:#ff79c6">*</span> oh <span style="color:#ff79c6">//</span> ow                                                        <span style="color:#6272a4"># 高度也按比例调整（即字符画总共有h行）</span>
+</span></span><span style="display:flex;"><span>    h <span style="color:#ff79c6">=</span> h <span style="color:#ff79c6">//</span> <span style="color:#bd93f9">2</span>                                                              <span style="color:#6272a4"># 在文本中，行与行之间有间隔，要进一步缩小高度才能得到较好效果</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>resize((w, h))                                                <span style="color:#6272a4"># 调整图片大小</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>convert(<span style="color:#f1fa8c">&#39;L&#39;</span>)                                                  <span style="color:#6272a4"># 将真彩色图像转换为灰度图</span>
+</span></span><span style="display:flex;"><span>    charImg <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>                                                            <span style="color:#6272a4"># 用于存储字符画</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 将img中的灰度值逐一转换成字符，每得到一个字符，添加到charImg最后，转换完一行要添加换行符</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">for</span> y <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(h):
+</span></span><span style="display:flex;"><span>         s <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ff79c6">for</span> x <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(w):
+</span></span><span style="display:flex;"><span>             gray <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>getpixel((x, y))                                   <span style="color:#6272a4"># &#39;L&#39;模式下,传入图像中一个像素的坐标,返回像素的灰度值0-255,0为黑255为白</span>
+</span></span><span style="display:flex;"><span>             char <span style="color:#ff79c6">=</span> GraytoChar(gray)
+</span></span><span style="display:flex;"><span>             s <span style="color:#ff79c6">=</span> s <span style="color:#ff79c6">+</span> char                                             
+</span></span><span style="display:flex;"><span>         charImg <span style="color:#ff79c6">=</span> charImg <span style="color:#ff79c6">+</span> s <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#39;</span>                             
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">return</span> charImg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s <span style="color:#ff79c6">=</span> toCharImage(<span style="color:#f1fa8c">&#39;test1.jpg&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># with open(&#34;f1.txt&#34;, &#34;w&#34;) as file:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#     file.write(s)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(s)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>本例中提供的源码主要由两个函数构成,最后29行为调用函数,32行终端输出字符画。你也可以取消注释掉的30,31行,同时生成字符画在相应的文件中。</p>
+<p>这里用到的&quot;test1.jpg&quot;跟&quot;f1.txt&quot;都是工作区下的相对路径,你可以修改成你想输入的图片文件直接运行。注意若图片不在工作区需要输入绝对路径!</p>
+<h3 id="2分段解析">2.分段解析</h3>
+<blockquote>
+<p>pillow库</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> PIL <span style="color:#ff79c6">import</span> Image
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Python平台事实上的图像处理标准库是PIL库Python Imaging Library，PIL功能非常强大，但由于PIL仅支持到Python 2.7，加上年久失修，于是一群志愿者在PIL的基础上创建了兼容的版本，名字叫Pillow，支持最新Python 3，又加入了许多新特性，因此，我们可以直接安装使用Pillow。注意不能同时安装Pillow和PIL库。</p>
+<p>在cmd上直接输入以下指令安装pillow库。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pip install pillow
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>函数GraytoChar(gray)</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">GraytoChar</span>(gray):
+</span></span><span style="display:flex;"><span>    allChar <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;&#34;@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">[]?-_+~&lt;&gt;i!lI;:,&#34;^`&#39; &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    char <span style="color:#ff79c6">=</span> allChar[<span style="color:#8be9fd;font-style:italic">int</span>(<span style="color:#8be9fd;font-style:italic">len</span>(allChar)<span style="color:#ff79c6">*</span>gray<span style="color:#ff79c6">/</span><span style="color:#bd93f9">256</span>)]                       
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> char
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>第2行:</strong> 定义字符集用来映射不同的灰度值。本例中使用三引号为了区别字符串中的单双引号，注意不要换行否则会在灰度转换时读入隐藏的换行符。
+<strong>为了兼容更多的图片,取得更好的字符画效果我推荐allChar = &ldquo;@%#*+=-:. &ldquo;</strong><br>
+<strong>第3行:</strong> 得到映射后的字符。其中除以256防止allChar索引溢出(这里你也可以在合适的范围内设定除以略微更大的数，比如260或者262等等)，或者len(allChar)-1。</p>
+<blockquote>
+<p>函数GraytoChar(gray)</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">toCharImage</span>(path):
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> Image<span style="color:#ff79c6">.</span>open(path)
+</span></span><span style="display:flex;"><span>    ow, oh <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>size                                                       <span style="color:#6272a4"># 原始图像的宽和高,img.size返回的是一个元组</span>
+</span></span><span style="display:flex;"><span>    w <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100</span>                                                                 <span style="color:#6272a4"># 调整后的宽度（即字符画每行有w个字符）</span>
+</span></span><span style="display:flex;"><span>    h <span style="color:#ff79c6">=</span> w <span style="color:#ff79c6">*</span> oh <span style="color:#ff79c6">//</span> ow                                                        <span style="color:#6272a4"># 高度也按比例调整（即字符画总共有h行）</span>
+</span></span><span style="display:flex;"><span>    h <span style="color:#ff79c6">=</span> h <span style="color:#ff79c6">//</span> <span style="color:#bd93f9">2</span>                                                              <span style="color:#6272a4"># 在文本中，行与行之间有间隔，要进一步缩小高度才能得到较好效果</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>resize((w, h))                                                <span style="color:#6272a4"># 调整图片大小</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>convert(<span style="color:#f1fa8c">&#39;L&#39;</span>)                                                  <span style="color:#6272a4"># 将真彩色图像转换为灰度图</span>
+</span></span><span style="display:flex;"><span>    charImg <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>                                                            <span style="color:#6272a4"># 用于存储字符画</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 将img中的灰度值逐一转换成字符，每得到一个字符，添加到charImg最后，转换完一行要添加换行符</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">for</span> y <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(h):
+</span></span><span style="display:flex;"><span>         s <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#ff79c6">for</span> x <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(w):
+</span></span><span style="display:flex;"><span>             gray <span style="color:#ff79c6">=</span> img<span style="color:#ff79c6">.</span>getpixel((x, y))                                   <span style="color:#6272a4"># &#39;L&#39;模式下,传入图像中一个像素的坐标,返回像素的灰度值0-255,0为黑255为白</span>
+</span></span><span style="display:flex;"><span>             char <span style="color:#ff79c6">=</span> GraytoChar(gray)
+</span></span><span style="display:flex;"><span>             s <span style="color:#ff79c6">=</span> s <span style="color:#ff79c6">+</span> char                                             
+</span></span><span style="display:flex;"><span>         charImg <span style="color:#ff79c6">=</span> charImg <span style="color:#ff79c6">+</span> s <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#39;</span>                             
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">return</span> charImg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>关于这个函数旁白注释已经写得很清楚了，读者理解代码后可自己根据需要修改4-7行代码</p>
+<h2 id="生成随机验证码">生成随机验证码</h2>
+<p>开发中的小插件，上网冲浪时十分常见的东西，但也十分简单~</p>
+<blockquote>
+<p>实现效果:</p>
+</blockquote>
+<p><img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/2.png" alt=""></p>
+<h3 id="1完整源码-1">1.完整源码</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> captcha.image <span style="color:#ff79c6">import</span> ImageCaptcha
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> PIL <span style="color:#ff79c6">import</span> Image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">captcha</span>():
+</span></span><span style="display:flex;"><span>    image <span style="color:#ff79c6">=</span> ImageCaptcha()
+</span></span><span style="display:flex;"><span>    allChar <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#34;</span>          <span style="color:#6272a4">#验证码的随机字符集</span>
+</span></span><span style="display:flex;"><span>    value <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    length <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(length):                                   <span style="color:#6272a4">#范围[0,5)</span>
+</span></span><span style="display:flex;"><span>        value <span style="color:#ff79c6">+=</span> allChar[random<span style="color:#ff79c6">.</span>randint(<span style="color:#bd93f9">0</span>, <span style="color:#8be9fd;font-style:italic">len</span>(allChar))]
+</span></span><span style="display:flex;"><span>    image<span style="color:#ff79c6">.</span>write(value, <span style="color:#f1fa8c">&#34;captcha.jpg&#34;</span>)                         <span style="color:#6272a4">#在当前文件夹(工作区)生成captcha.jpg的图片验证码(验证信息为:value)</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> Image<span style="color:#ff79c6">.</span>open(<span style="color:#f1fa8c">&#34;captcha.jpg&#34;</span>)
+</span></span><span style="display:flex;"><span>    img<span style="color:#ff79c6">.</span>show()                                                <span style="color:#6272a4">#展示验证码</span>
+</span></span><span style="display:flex;"><span>    key <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">input</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;请输入验证码:</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>)     
+</span></span><span style="display:flex;"><span>    i <span style="color:#ff79c6">=</span> (key<span style="color:#ff79c6">.</span>upper() <span style="color:#ff79c6">==</span> value)                                <span style="color:#6272a4">#统一大小并验证输入的验证码是否正确</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> i <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">False</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;验证码错误</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>        captcha()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;验证通过!&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;程序开始&#34;</span>)
+</span></span><span style="display:flex;"><span>a <span style="color:#ff79c6">=</span> captcha()
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;程序结束&#34;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2分段解析-1">2.分段解析</h3>
+<blockquote>
+<p>captcha库</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> captcha.image <span style="color:#ff79c6">import</span> ImageCaptcha
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。本例只讲解图形验证码模块。</p>
+<p>为了实现PIL库的部分功能。首先在cmd上直接输入以下指令安装captcha库</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pip install captcha
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>函数captcha()</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">captcha</span>():
+</span></span><span style="display:flex;"><span>    image <span style="color:#ff79c6">=</span> ImageCaptcha()
+</span></span><span style="display:flex;"><span>    allChar <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#34;</span>          <span style="color:#6272a4">#验证码的随机字符集</span>
+</span></span><span style="display:flex;"><span>    value <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    length <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(length):                                   <span style="color:#6272a4">#范围[0,5)</span>
+</span></span><span style="display:flex;"><span>        value <span style="color:#ff79c6">+=</span> allChar[random<span style="color:#ff79c6">.</span>randint(<span style="color:#bd93f9">0</span>, <span style="color:#8be9fd;font-style:italic">len</span>(allChar))]
+</span></span><span style="display:flex;"><span>    image<span style="color:#ff79c6">.</span>write(value, <span style="color:#f1fa8c">&#34;captcha.jpg&#34;</span>)                         <span style="color:#6272a4">#在当前文件夹(工作区)生成captcha.jpg的图片验证码(验证信息为:value)</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> Image<span style="color:#ff79c6">.</span>open(<span style="color:#f1fa8c">&#34;captcha.jpg&#34;</span>)
+</span></span><span style="display:flex;"><span>    img<span style="color:#ff79c6">.</span>show()                                                <span style="color:#6272a4">#展示验证码</span>
+</span></span><span style="display:flex;"><span>    key <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">input</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;请输入验证码:</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>)     
+</span></span><span style="display:flex;"><span>    i <span style="color:#ff79c6">=</span> (key<span style="color:#ff79c6">.</span>upper() <span style="color:#ff79c6">==</span> value)                                <span style="color:#6272a4">#统一大小并验证输入的验证码是否正确</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> i <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">False</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;验证码错误</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>        captcha()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">&#34;验证通过!&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>整个函数可分为三个部分:</strong><br>
+ <strong>2~7行:</strong> 生成一个定义长度的随机字符串<br>
+<strong>8~10行:</strong> 生成基于随机字符串的验证码并展示<br>
+<strong>11~17行:</strong> 验证输入是否与验证码信息匹配</p>
+<p>读者理解后可自行对其进行修改并将其做为插件运用于需要的地方。</p>
+<h2 id="qq群词云">qq群词云</h2>
+<p>词云本身使用场景很广，但对于初学者特别是学生来讲，qq群词云无疑是最有趣的词云运用之一，本例也由此展开。但是值得说明的一点是qq群消息本身内容很多也很难处理，因此qq群词云并不是最简单的入门词云项目。</p>
+<blockquote>
+<p>实现效果:</p>
+</blockquote>
+<p><img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/3.png" alt="">
+(分别取自一个动漫群和一个机器人群，这里忘记设置最小字体了所以有点看不清出现频率低的词条)</p>
+<h3 id="完整源码">完整源码</h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> PIL <span style="color:#ff79c6">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> wordcloud
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">cutTxt</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">with</span> <span style="color:#8be9fd;font-style:italic">open</span>(<span style="color:#f1fa8c">&#34;1.txt&#34;</span>, <span style="color:#f1fa8c">&#34;r+&#34;</span>, encoding<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;utf-8&#34;</span>) <span style="color:#ff79c6">as</span> file:     <span style="color:#6272a4"># 打开导出的聊天消息txt文件,我这里命名的是1.txt</span>
+</span></span><span style="display:flex;"><span>        flag <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        newtext <span style="color:#ff79c6">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> word <span style="color:#ff79c6">in</span> file:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> flag <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+</span></span><span style="display:flex;"><span>                tmp <span style="color:#ff79c6">=</span> word[<span style="color:#bd93f9">0</span>:<span style="color:#bd93f9">10</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> (tmp <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;2022-07-15&#34;</span>):                   <span style="color:#6272a4"># 过滤掉2022.7.15之前的聊天记录</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>                    flag <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> flag <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> word <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>                tmp <span style="color:#ff79c6">=</span> word[<span style="color:#bd93f9">0</span>:<span style="color:#bd93f9">4</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> (tmp <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;2022&#34;</span>):
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>                tmp <span style="color:#ff79c6">=</span> word[<span style="color:#bd93f9">0</span>:<span style="color:#bd93f9">2</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> (tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;/&#39;</span> <span style="color:#ff79c6">or</span> tmp[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;@&#39;</span>):  <span style="color:#6272a4"># 过滤掉单独或开头发的图片和表情,例如[图片]，/滑稽xxxx</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>                newtext<span style="color:#ff79c6">.</span>append(word)
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 将过滤后剩下的文字重新写入文件中去</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">with</span> <span style="color:#8be9fd;font-style:italic">open</span>(<span style="color:#f1fa8c">&#39;2.txt&#39;</span>, <span style="color:#f1fa8c">&#39;w&#39;</span>, encoding<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;utf-8&#39;</span>) <span style="color:#ff79c6">as</span> file:      <span style="color:#6272a4">#创立或复写2.txt</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> newtext:
+</span></span><span style="display:flex;"><span>            file<span style="color:#ff79c6">.</span>write(i)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#34;2.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">draw</span>(file):
+</span></span><span style="display:flex;"><span>    file <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">open</span>(file, encoding<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;utf-8&#34;</span>)                     <span style="color:#6272a4"># 打开处理后的txt文件夹</span>
+</span></span><span style="display:flex;"><span>    text <span style="color:#ff79c6">=</span> file<span style="color:#ff79c6">.</span>read()
+</span></span><span style="display:flex;"><span>    img1 <span style="color:#ff79c6">=</span> Image<span style="color:#ff79c6">.</span>open(<span style="color:#f1fa8c">&#39;1.jpg&#39;</span>)                              <span style="color:#6272a4"># 打开图片</span>
+</span></span><span style="display:flex;"><span>    img_array <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>array(img1)                              <span style="color:#6272a4"># 将图片装换为数组</span>
+</span></span><span style="display:flex;"><span>    sw <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#34;表情&#34;</span>,<span style="color:#f1fa8c">&#34;图片&#34;</span>}                                     <span style="color:#6272a4"># 屏蔽词,本例这里针对的是语句中出现的表情或者图片</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    wc <span style="color:#ff79c6">=</span> wordcloud<span style="color:#ff79c6">.</span>WordCloud(
+</span></span><span style="display:flex;"><span>        background_color<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;white&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># width=500,                                        # 默认400</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># height=500,                                       # 默认200</span>
+</span></span><span style="display:flex;"><span>        max_words<span style="color:#ff79c6">=</span><span style="color:#bd93f9">100</span>,                                      <span style="color:#6272a4"># 要显示的词的最大个数,默认200</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># max_font_size=300,                                # 设置字体最大值,默认根据高度自动调节</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># min_font_size = 100,</span>
+</span></span><span style="display:flex;"><span>        mask<span style="color:#ff79c6">=</span>img_array,                                     <span style="color:#6272a4"># 背景图片,默认长方形,python自动将图片非白色部分填充，且图片越清晰，运行速度越快</span>
+</span></span><span style="display:flex;"><span>        stopwords<span style="color:#ff79c6">=</span>sw,                                       <span style="color:#6272a4"># 需要屏蔽的词</span>
+</span></span><span style="display:flex;"><span>        font_path<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;C</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">Windows</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">simfang.ttf&#34;</span>)                <span style="color:#6272a4"># 设置字体格式,默认不支持中文,字体在此路径自选</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    wc <span style="color:#ff79c6">=</span> wc<span style="color:#ff79c6">.</span>generate(text)                                  <span style="color:#6272a4"># 生成词云对象</span>
+</span></span><span style="display:flex;"><span>    img <span style="color:#ff79c6">=</span> wc<span style="color:#ff79c6">.</span>to_image()                                     <span style="color:#6272a4"># 将词云对象转换为图片</span>
+</span></span><span style="display:flex;"><span>    img<span style="color:#ff79c6">.</span>show()                                              <span style="color:#6272a4"># 展示图片</span>
+</span></span><span style="display:flex;"><span>    wc<span style="color:#ff79c6">.</span>to_file(<span style="color:#f1fa8c">&#34;1_wc.jpg&#34;</span>)                                  <span style="color:#6272a4"># 保存图片为1_wc.jpg</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>draw(cutTxt())                                              <span style="color:#6272a4"># 调用函数</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="分段解析">分段解析</h3>
+<blockquote>
+<p>worldclound</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> PIL <span style="color:#ff79c6">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> wordcloud
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>wordcloud是优秀的词云展示第三方库,其中包含matplotlib模块和numpy模块</strong></p>
+<p>NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库一般在python中我们会对Numpy进行缩写: import numpy as np ， 因此后续中的np均指numpy。</p>
+<p>先在cmd中安装相关模块:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pip install wordcloud
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>def cutTxt()</p>
+</blockquote>
+<p>此函数起获取需要的聊天消息范围的作用，过滤算法是本人基于文件读取是一行一行读取的原则写的，刻意没有使用网上千篇一律的正则表达式，目的是使代码简单易懂降低门槛。这里是把想要的消息记录写入到新创建的f2.txt中。<strong>怎么导出qq聊天消息，读者可自己网上查询。</strong></p>
+<p>其中1.txt，2.txt以及下文的1.jpg，1_wc.jpg读者都可自定义名字</p>
+<blockquote>
+<p>def draw(file)</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>wc <span style="color:#ff79c6">=</span> wordcloud<span style="color:#ff79c6">.</span>WordCloud(
+</span></span><span style="display:flex;"><span>        background_color<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;white&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># width=500,                                        # 默认400</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># height=500,                                       # 默认200</span>
+</span></span><span style="display:flex;"><span>        max_words<span style="color:#ff79c6">=</span><span style="color:#bd93f9">100</span>,                                      <span style="color:#6272a4"># 要显示的词的最大个数,默认200</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># max_font_size=300,                                # 设置字体最大值,默认根据高度自动调节</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># min_font_size = 100,</span>
+</span></span><span style="display:flex;"><span>        mask<span style="color:#ff79c6">=</span>img_array,                                     <span style="color:#6272a4"># 背景图片,默认长方形,python自动将图片非白色部分填充，且图片越清晰，运行速度越快</span>
+</span></span><span style="display:flex;"><span>        stopwords<span style="color:#ff79c6">=</span>sw,                                       <span style="color:#6272a4"># 需要屏蔽的词</span>
+</span></span><span style="display:flex;"><span>        font_path<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;C</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">Windows</span><span style="color:#f1fa8c">\\</span><span style="color:#f1fa8c">simfang.ttf&#34;</span>)                <span style="color:#6272a4"># 设置字体格式,默认不支持中文,字体在此路径自选</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此函数则是把过滤后的txt文件提取并生成词云图片。这里对wordcloud.WordCloud需要说明的是其实这个函数可自定义的参数很多，这里只列举了几个常用的参数。</p>
+<p>其中我这里使用的mask的1.jpg是一下这个♥:</p>
+<p><img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/4.png" alt=""></p>
+<p><strong>其中font_path需要要的系统自带字体选择路径如下所示:</strong></p>
+<p><img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/5.png" alt="">
+<img src="/imgs/2022/python%E9%A1%B9%E7%9B%AE/6.png" alt=""></p>
+<p>找到你想要的字体后，右键查看名称，复制下来就行。</p>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2023 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/avatar.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+

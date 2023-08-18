@@ -1,0 +1,42 @@
+/*copy按钮*/
+.highlight {
+    position: relative;
+}
+
+.highlight td:first-child {
+    user-select: none;
+}
+
+.highlight-copy-btn {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    border: 0;
+    border-radius: 4px;
+    padding: 1px;
+    font-size: 0.8em;
+    line-height: 1.8;
+    color: #fff;
+    background-color: #777;
+    min-width: 55px;
+    text-align: center;
+}
+
+.highlight-copy-btn:hover {
+    background-color: #666;
+}
+
+/*copy按钮*/
+/*导航栏*/
+
+.ui.segment.toc {
+    overflow-y: scroll;
+    position: relative;
+    max-height: 500px;
+}
+
+/*导航栏*/
+
+.ui.card, .ui.cards>.card{
+    position: relative;
+}

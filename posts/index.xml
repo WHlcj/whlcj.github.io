@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 来自缤纷多彩的灰</title>
+    <link>https://whlcj.github.io/posts/</link>
+    <description>Recent content in Posts on 来自缤纷多彩的灰</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a rel= &#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。转载请注明原文地址及作者。</copyright>
+    <lastBuildDate>Fri, 18 Aug 2023 00:00:11 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Xcode打包App分发提交问题汇总</title>
+      <link>https://whlcj.github.io/posts/2023/xcode_to_appstore/</link>
+      <pubDate>Fri, 18 Aug 2023 00:00:11 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/xcode_to_appstore/</guid>
+      <description>&lt;p&gt;持续更新遇到的相关问题和解决方案&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>遇到的git问题汇总</title>
+      <link>https://whlcj.github.io/posts/2023/summary_of_git_issues/</link>
+      <pubDate>Sat, 12 Aug 2023 21:06:49 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/summary_of_git_issues/</guid>
+      <description>&lt;p&gt;在实践中陆续遇到了一些git相关的问题，我将汇总并持续更新，当前更新2023.5.18&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2023上半年总结</title>
+      <link>https://whlcj.github.io/posts/2023/half_2023/</link>
+      <pubDate>Mon, 17 Jul 2023 00:43:24 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/half_2023/</guid>
+      <description>&lt;p&gt;这次我想从天空之城聊起~&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CCCC竞赛（二）</title>
+      <link>https://whlcj.github.io/posts/2023/cccc_two/</link>
+      <pubDate>Wed, 12 Jul 2023 17:30:55 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/cccc_two/</guid>
+      <description>&lt;p&gt;先说结果吧&amp;mdash;&amp;mdash;华北赛区🥈但是也仅此而已。。。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SwiftUI NavigationStack Guide</title>
+      <link>https://whlcj.github.io/posts/2023/navigationstack_guide/</link>
+      <pubDate>Wed, 05 Jul 2023 15:08:03 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/navigationstack_guide/</guid>
+      <description>&lt;p&gt;介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址&lt;a href=&#34;https://github.com/WHlcj/IOS-Practice/tree/main/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/NavigationStackDemo&#34;&gt;在这里&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SwiftUI处理十六进制颜色</title>
+      <link>https://whlcj.github.io/posts/2023/deal_hex_color/</link>
+      <pubDate>Sat, 17 Jun 2023 01:48:47 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/deal_hex_color/</guid>
+      <description>&lt;p&gt;由于Apple官方并没有在SwiftUI中给出十六色处理接口,这里介绍两种十六色处理方法.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IOS项目中添加外部字体</title>
+      <link>https://whlcj.github.io/posts/2023/fontfamily_to_project/</link>
+      <pubDate>Thu, 15 Jun 2023 00:51:20 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/fontfamily_to_project/</guid>
+      <description>&lt;p&gt;给出UIkit和SwiftUI两种框架工程的示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2023WWDC之夜(北京场)</title>
+      <link>https://whlcj.github.io/posts/2023/wwdc_night/</link>
+      <pubDate>Wed, 07 Jun 2023 14:42:00 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/wwdc_night/</guid>
+      <description>&lt;p&gt;很有意思的聚会，明年我还来！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IOS_Hackathon</title>
+      <link>https://whlcj.github.io/posts/2023/ios_hackathon/</link>
+      <pubDate>Mon, 22 May 2023 11:14:52 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/ios_hackathon/</guid>
+      <description>&lt;p&gt;人生第一次主动通宵，珍贵且难忘的回忆，大家都很棒！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WWDC竞赛（一）</title>
+      <link>https://whlcj.github.io/posts/2023/wwdc/</link>
+      <pubDate>Fri, 28 Apr 2023 01:07:28 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/wwdc/</guid>
+      <description>&lt;p&gt;介绍iOS方向最牛逼的赛事，以及个人认识与准备过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CCCC竞赛（一）</title>
+      <link>https://whlcj.github.io/posts/2023/cccc_one/</link>
+      <pubDate>Fri, 28 Apr 2023 00:45:55 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/cccc_one/</guid>
+      <description>&lt;p&gt;简单介绍iOS方向的国内主要赛事，以及分享个人参赛以及准备经验&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>启2023</title>
+      <link>https://whlcj.github.io/posts/2022/2022/</link>
+      <pubDate>Sun, 29 Jan 2023 00:09:34 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/2022/</guid>
+      <description>&lt;p&gt;———-以前的世界是五彩斑斓的，看世界的眼睛里是灰色。现在眼睛里充满了色彩，却发现世界原来是一片灰色。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git学习笔记</title>
+      <link>https://whlcj.github.io/posts/2022/study_note_of_git/</link>
+      <pubDate>Fri, 23 Dec 2022 20:09:10 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/study_note_of_git/</guid>
+      <description>&lt;p&gt;这下终于弄懂git的基础使用了！(bushi)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《大数据时代》读后感</title>
+      <link>https://whlcj.github.io/posts/2022/relection_of_bigdata/</link>
+      <pubDate>Sun, 06 Nov 2022 21:47:36 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/relection_of_bigdata/</guid>
+      <description>&lt;p&gt;    以前我是很少看有关科技时代的书籍的，与每一代青年人一样，我自以为已经站在了时代的最前沿。可是当我看完这本书之后，我不得不承认，我早已落后时代至少10年&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iOS开发入门</title>
+      <link>https://whlcj.github.io/posts/2023/begin_with_ios/</link>
+      <pubDate>Fri, 04 Nov 2022 23:55:24 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/begin_with_ios/</guid>
+      <description>&lt;p&gt;总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————&lt;strong&gt;本入门篇持续更新中！（2023.4.28）&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MacOS破解jet全家桶遇到的问题及解决</title>
+      <link>https://whlcj.github.io/posts/2022/jet_with_macos/</link>
+      <pubDate>Thu, 03 Nov 2022 16:22:00 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/jet_with_macos/</guid>
+      <description>&lt;p&gt;    不能容忍老师提供的旧的教育版idea，找来互联网上大佬们破解jebBrains全家桶的方法。本来这样就挺好了直到某天一不小心删掉了破解工具，应用出现了异常&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>JDBC学习笔记</title>
+      <link>https://whlcj.github.io/posts/2022/study_note_of_jdbc/</link>
+      <pubDate>Tue, 09 Aug 2022 15:33:07 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/study_note_of_jdbc/</guid>
+      <description>&lt;p&gt;以及IDEA常用快捷键汇总&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL学习笔记</title>
+      <link>https://whlcj.github.io/posts/2022/study_note_of_mysql/</link>
+      <pubDate>Wed, 03 Aug 2022 16:43:40 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/study_note_of_mysql/</guid>
+      <description>&lt;p&gt;基于MySQL的SQL学习笔记。细琐的东西特别多，因此笔记也比较多。本笔记主要是为了需要时进行查询，因此会删去一些非必要的解释及说明。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2022上半年总结</title>
+      <link>https://whlcj.github.io/posts/2022/half_summary_of_2022/</link>
+      <pubDate>Tue, 02 Aug 2022 21:02:49 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/half_summary_of_2022/</guid>
+      <description>&lt;p&gt;———-这是一个适合逃跑的好时节。趁岁月还没有开始紧迫，阳光明媚，笑容如初。少有责任与担当，这是一个灿烂的季节。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>三个Python进阶有趣项目详解</title>
+      <link>https://whlcj.github.io/posts/2022/python_projects/</link>
+      <pubDate>Thu, 14 Jul 2022 10:32:57 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/python_projects/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;图片转字符画，生成随机验证码，qq群词云详解。代码可直接运行，小白也可直接上手&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记</title>
+      <link>https://whlcj.github.io/posts/2022/study_note_of_python/</link>
+      <pubDate>Wed, 13 Jul 2022 11:39:15 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/study_note_of_python/</guid>
+      <description>本笔记基于b站up主：鱼C-小甲鱼的Python视频教程顺序编写，主要为了是在需要时起到一个简易帮助手册的作用。 新手可参照python安装目</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04更换Linux内核</title>
+      <link>https://whlcj.github.io/posts/2022/ubuntu20.04_change_linux.core/</link>
+      <pubDate>Sat, 26 Mar 2022 14:18:54 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/ubuntu20.04_change_linux.core/</guid>
+      <description>&lt;p&gt;花了两天时间，把网上的各色各样的教程都试了一遍后还是没成功，但是却误打误撞自己找到了正确答案。
+我想说，改linux内核，看这一篇就够了！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我，仿造品</title>
+      <link>https://whlcj.github.io/posts/2022/me_imitation/</link>
+      <pubDate>Mon, 24 Jan 2022 22:59:29 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/me_imitation/</guid>
+      <description>&lt;p&gt;&lt;em&gt;“她一定在那里等着我。”&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;“在那绚丽多彩的记忆褪色之前，我有话想对她说。”&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的2021年度总结</title>
+      <link>https://whlcj.github.io/posts/2022/summary_of_2021/</link>
+      <pubDate>Mon, 17 Jan 2022 09:15:05 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2022/summary_of_2021/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&amp;mdash;-是绝望的，是希望的，是灰暗的，是绚丽多彩的，是勇敢的，是坚定的！&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Historical_modification</title>
+      <link>https://whlcj.github.io/posts/historical_modification/</link>
+      <pubDate>Mon, 29 Nov 2021 20:56:31 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/historical_modification/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;这里是一些我对搭建博客的探索记录:&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;（持续更新中！）&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的第一篇博客！</title>
+      <link>https://whlcj.github.io/posts/hello_world/</link>
+      <pubDate>Fri, 26 Nov 2021 12:55:06 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/hello_world/</guid>
+      <description>&lt;p&gt;Hello World！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

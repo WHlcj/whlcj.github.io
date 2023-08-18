@@ -1,0 +1,739 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SwiftUI NavigationStack Guide | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址在这里。
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2023/navigationstack_guide/" />
+
+
+<meta property="og:title" content="SwiftUI NavigationStack Guide" />
+<meta property="og:description" content="介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址在这里。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2023/navigationstack_guide/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-05T15:08:03+08:00" />
+<meta property="article:modified_time" content="2023-07-13T13:36:28+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SwiftUI NavigationStack Guide"/>
+<meta name="twitter:description" content="介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址在这里。"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前置资源">前置资源</a></li>
+    <li><a href="#初步认识">初步认识</a>
+      <ul>
+        <li><a href="#navigationstack与navigationview">NavigationStack与NavigationView</a></li>
+        <li><a href="#navigationpath">NavigationPath</a></li>
+        <li><a href="#navigationstack">NavigationStack</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用实例">使用实例</a>
+      <ul>
+        <li><a href="#demo结构">Demo结构</a></li>
+        <li><a href="#approuter">AppRouter</a></li>
+        <li><a href="#contentview">ContentView</a></li>
+        <li><a href="#navigationdestination">.navigationDestination</a></li>
+      </ul>
+    </li>
+    <li><a href="#一个有趣点">一个有趣点</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=SwiftUI%20NavigationStack%20Guide&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2fnavigationstack_guide%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2fnavigationstack_guide%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">SwiftUI NavigationStack Guide<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2023-07-05T15:08:03&#43;08:00</span>
+                
+
+              | 6 分钟阅读
+
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>介绍一种我自己摸索出来的NavigationStack的用法，好用且简单！完整的项目地址<a href="https://github.com/WHlcj/IOS-Practice/tree/main/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/NavigationStackDemo">在这里</a>。</p>
+<p>需要说明的是，阅读本篇博客前建议新人可以先自己查阅NavigationStack官方文档或相关资料先进行一些简要的了解。</p>
+<h2 id="前置资源">前置资源</h2>
+<p>    当前环境如下</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>macOS : Ventura 13.4.1
+</span></span><span style="display:flex;"><span>Xcode : 14.3.1
+</span></span><span style="display:flex;"><span>swift : 5.8
+</span></span><span style="display:flex;"><span>swiftUI : 4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="初步认识">初步认识</h2>
+<h3 id="navigationstack与navigationview">NavigationStack与NavigationView</h3>
+<p>    众所周知iOS16后官方开始主推NavigationStack导航方式，NavigationStack跟NavigationView主要的不同点是前者是一种数据导航控制方式，更加灵活、结构更加清晰。可是官方文档和网上已有资源讲解这个东西很潦草，我花了巨量时间在探索NavigationStack上面，最终自己摸索出一套简单好用的页面导航方式分享给大家。</p>
+<p><img src="/imgs/NavigationStack_Guide/ipad.jpg" alt=""></p>
+<p><img src="/imgs/NavigationStack_Guide/ipad1.jpg" alt=""></p>
+<p><img src="/imgs/NavigationStack_Guide/ipad2.jpg" alt=""></p>
+<p>    首先NavigationStack可以直接替换NavigationView两者在iOS上的效果没有任何区别，换句话说NavigationStack保留了NavigationView的功能&mdash;&mdash;而在iPad OS上原来的NavigationView则被改成了原来的NavigationView加上.navigationViewStyle(.stack)修饰&mdash;&mdash;同时也增加了.navigationDestination的方法调用，这个下面细🔒。</p>
+<h3 id="navigationpath">NavigationPath</h3>
+<p>    NavigationPath意思是一个自定义数据类型的栈通过pop出栈或者push进栈来实现页面跳转，相当于页面进栈和出栈。它有三种使用方式（如下图），其中第一种上面已经简单介绍过了。</p>
+<p><img src="/imgs/NavigationStack_Guide/NavigationPath.jpg" alt=""></p>
+<p>    第二种和第三种使用方式都是数据控制导航，其区别是第二种方式是开发者自定义一个数组（如下图官方的实例），第三种方式是官方提供一个封装数组（下文实例我采用的官方提供的NavigationPath），这两者使用方式完全一样。</p>
+<p><img src="/imgs/NavigationStack_Guide/NavigationPath1.jpg" alt=""></p>
+<h3 id="navigationstack">NavigationStack</h3>
+<p>    NavigationStack有三种使用方式，其中有两个参数。path参数就是你绑定的NavigationPath，root参数就是你使用NavigationStack的这个View就是根View，此时NavigationPath为空，也就是当你清空NAvigationPath时会返回到的View。读者可以参考下文中出现的LoginView进一步理解。</p>
+<p><img src="/imgs/NavigationStack_Guide/NavigationStack.jpg" alt=""></p>
+<h2 id="使用实例">使用实例</h2>
+<p>    NavigationStack本质思想是通过一个数组的数据控制来控制页面跳转。这里我的实现方法是先把所有页面抽象成enum类型为作为常量作为该View的“id”，然后通过ContentView来识别这个“id”呈现出不同的View，同时path这个数组是始终存在且贯穿整个app的所以我在ContentView中也加入@Binding来绑定path。</p>
+<h3 id="demo结构">Demo结构</h3>
+<p>    首先介绍一下demo结构，如下图。我介绍的NavigationStack的使用的主要组件是AppRouter常量,ContentView和其余View。而设计的页面也是从LoginView开始到ProfileView和SettingView逻辑自洽。其中ProfileView和SettingView是完全一样的，只是为了更加方便理解而从HomeView分出两个View。</p>
+<p><img src="/imgs/NavigationStack_Guide/1.jpg" alt=""></p>
+<p><img src="/imgs/NavigationStack_Guide/2.jpg" alt=""></p>
+<h3 id="approuter">AppRouter</h3>
+<p>    AppRouter是我用来保存Views常量的，使用enum类型保存数据更贴合数据驱动的NavigationStack的使用方式。</p>
+<p><img src="/imgs/NavigationStack_Guide/3.jpg" alt=""></p>
+<h3 id="contentview">ContentView</h3>
+<p>    ContentView是我用来实现页面跳转的主要方式，也是我自己摸索出来的方法的核心部分。这里我声明了一个@State var view 配合使用switch来标明需要跳转的View。声明@Binding var path 来传入NavigationPath实现数据控制。</p>
+<p><img src="/imgs/NavigationStack_Guide/4.jpg" alt=""></p>
+<h3 id="navigationdestination">.navigationDestination</h3>
+<p>    .navigationDestination是NavigationStack的导航索引，它明确了如何使用数据导航，在这里我使用ContentView来接收传入的数据和跳转到相应页面。需要指出来的一点是，开发者可以同时添加多个.navigationDestination来处理多种不同的数据，这里我只演示了ContentView也就是我写的View之间跳转的功能&mdash;&mdash;比如类似Apple官方文档给出来的实例，开发者可以建立一个表格，表格中的每一项数据对应一个CardView。</p>
+<p>此外，只需在root页面添加.navigationDestination即可。</p>
+<p><img src="/imgs/NavigationStack_Guide/5.jpg" alt=""></p>
+<p>    在上图中，NavigationLink(value: AppRouter.HomeView)的效果完全等价于自定义的Button实现path.append(AppRouter.HomeView)。但是NavigationLink不可以实现多页面跳转，而上图中，点击Go to Setting按钮则可以向path数组中添加AppRouter.HomeView和AppRouter.SettingView这样可以一键跳转到第三页面，从第三页面也可以通过path.removeLast(2)清空path来返回第一页面。</p>
+<p>    想要了解如何使用NavigationStack到这里就结束了，下面是我在测试过程中发现的一个有趣点，感兴趣的朋友们可以看一看。</p>
+<h2 id="一个有趣点">一个有趣点</h2>
+<p>    在测试中我发现dismiss返回跟navigation右上角自带的返回键效果是一样的，但是跟使用path.remove效果略有不同。如下图，我在每一个View使用.onAppear方法输出当前View的path的数量来进行测试。</p>
+<p><img src="/imgs/NavigationStack_Guide/6.jpg" alt=""></p>
+<p>    当使用dismiss或者左上角自带的back返回，path的数组数量不会减少（比如这里尽管回到root界面了，path中数量还是1），但是也不会影响跳转到其他界面。而通过path.removeLast返回，则从逻辑上是正确的（比如这里回到root界面，path中数量理论上就是0）。后来我试了试跳转到其他界面，比如跳转到界面2，那么这个时候path堆栈中数量是2，通过dismiss或者自带返回回到界面1，path堆栈中数量还是2.但是从界面1跳转到另外一个界面3，这个时候path堆栈的数量还是2。也就是说并不影响正常使用。但是总感觉怪怪的。</p>
+<p><img src="/imgs/NavigationStack_Guide/7.png" alt=""></p>
+<p>后面我又调用下面这段代码延后一秒再次输出一次从HomeView跳转到root信息就为正常的（也就是path数组中的数量为0）</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span>    .onAppear {
+</span></span><span style="display:flex;"><span>        print(<span style="color:#f1fa8c">&#34;现在是LoginView,path的数量是</span><span style="color:#f1fa8c">\(</span>path.count<span style="color:#f1fa8c">)</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>        DispatchQueue.main.asyncAfter(deadline: .now() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>) {
+</span></span><span style="display:flex;"><span>            print(<span style="color:#f1fa8c">&#34;1秒后LoginView,path的数量是</span><span style="color:#f1fa8c">\(</span>path.count<span style="color:#f1fa8c">)</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/imgs/NavigationStack_Guide/8.jpg" alt=""></p>
+<p>猜测通过path.removeLast()方法是直接操作数据源，ui监听到数据源变化而变化，dismiss或自带的返回键时是操作pop，动画结束后修改数据源。</p>
+<p><strong>终</strong></p>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2023 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/avatar.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+
