@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a rel= &#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。转载请注明原文地址及作者。</copyright>
-    <lastBuildDate>Fri, 18 Aug 2023 00:00:11 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Aug 2023 19:50:11 +0800</lastBuildDate><atom:link href="https://whlcj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SwiftUI实现画板功能</title>
+      <link>https://whlcj.github.io/posts/2023/paintdemo/</link>
+      <pubDate>Fri, 25 Aug 2023 19:50:11 +0800</pubDate>
+      
+      <guid>https://whlcj.github.io/posts/2023/paintdemo/</guid>
+      <description>&lt;p&gt;介绍两种swiftUI实现画板的方法，演示的PaintDemo&lt;a href=&#34;https://github.com/WHlcj/iOS-Practice/tree/main/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/PaintDemo&#34;&gt;在这里&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Xcode打包App分发提交问题汇总</title>
       <link>https://whlcj.github.io/posts/2023/xcode_to_appstore/</link>
@@ -63,7 +72,7 @@
     </item>
     
     <item>
-      <title>IOS项目中添加外部字体</title>
+      <title>iOS项目中添加外部字体</title>
       <link>https://whlcj.github.io/posts/2023/fontfamily_to_project/</link>
       <pubDate>Thu, 15 Jun 2023 00:51:20 +0800</pubDate>
       
@@ -81,7 +90,7 @@
     </item>
     
     <item>
-      <title>IOS_Hackathon</title>
+      <title>iOS_Hackathon</title>
       <link>https://whlcj.github.io/posts/2023/ios_hackathon/</link>
       <pubDate>Mon, 22 May 2023 11:14:52 +0800</pubDate>
       
