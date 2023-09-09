@@ -48,7 +48,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/2023/navigationstack_guide/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-07-05T15:08:03+08:00" />
-<meta property="article:modified_time" content="2023-07-13T13:36:28+08:00" />
+<meta property="article:modified_time" content="2023-09-09T14:25:58+08:00" />
 
 
 
@@ -243,41 +243,41 @@
 </div><h2 id="初步认识">初步认识</h2>
 <h3 id="navigationstack与navigationview">NavigationStack与NavigationView</h3>
 <p>    众所周知iOS16后官方开始主推NavigationStack导航方式，NavigationStack跟NavigationView主要的不同点是前者是一种数据导航控制方式，更加灵活、结构更加清晰。可是官方文档和网上已有资源讲解这个东西很潦草，我花了巨量时间在探索NavigationStack上面，最终自己摸索出一套简单好用的页面导航方式分享给大家。</p>
-<p><img src="/imgs/NavigationStack_Guide/ipad.jpg" alt=""></p>
-<p><img src="/imgs/NavigationStack_Guide/ipad1.jpg" alt=""></p>
-<p><img src="/imgs/NavigationStack_Guide/ipad2.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/ipad.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/ipad1.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/ipad2.jpg" alt=""></p>
 <p>    首先NavigationStack可以直接替换NavigationView两者在iOS上的效果没有任何区别，换句话说NavigationStack保留了NavigationView的功能&mdash;&mdash;而在iPad OS上原来的NavigationView则被改成了原来的NavigationView加上.navigationViewStyle(.stack)修饰&mdash;&mdash;同时也增加了.navigationDestination的方法调用，这个下面细🔒。</p>
 <h3 id="navigationpath">NavigationPath</h3>
 <p>    NavigationPath意思是一个自定义数据类型的栈通过pop出栈或者push进栈来实现页面跳转，相当于页面进栈和出栈。它有三种使用方式（如下图），其中第一种上面已经简单介绍过了。</p>
-<p><img src="/imgs/NavigationStack_Guide/NavigationPath.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/NavigationPath.jpg" alt=""></p>
 <p>    第二种和第三种使用方式都是数据控制导航，其区别是第二种方式是开发者自定义一个数组（如下图官方的实例），第三种方式是官方提供一个封装数组（下文实例我采用的官方提供的NavigationPath），这两者使用方式完全一样。</p>
-<p><img src="/imgs/NavigationStack_Guide/NavigationPath1.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/NavigationPath1.jpg" alt=""></p>
 <h3 id="navigationstack">NavigationStack</h3>
 <p>    NavigationStack有三种使用方式，其中有两个参数。path参数就是你绑定的NavigationPath，root参数就是你使用NavigationStack的这个View就是根View，此时NavigationPath为空，也就是当你清空NAvigationPath时会返回到的View。读者可以参考下文中出现的LoginView进一步理解。</p>
-<p><img src="/imgs/NavigationStack_Guide/NavigationStack.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/NavigationStack.jpg" alt=""></p>
 <h2 id="使用实例">使用实例</h2>
 <p>    NavigationStack本质思想是通过一个数组的数据控制来控制页面跳转。这里我的实现方法是先把所有页面抽象成enum类型为作为常量作为该View的“id”，然后通过ContentView来识别这个“id”呈现出不同的View，同时path这个数组是始终存在且贯穿整个app的所以我在ContentView中也加入@Binding来绑定path。</p>
 <h3 id="demo结构">Demo结构</h3>
 <p>    首先介绍一下demo结构，如下图。我介绍的NavigationStack的使用的主要组件是AppRouter常量,ContentView和其余View。而设计的页面也是从LoginView开始到ProfileView和SettingView逻辑自洽。其中ProfileView和SettingView是完全一样的，只是为了更加方便理解而从HomeView分出两个View。</p>
-<p><img src="/imgs/NavigationStack_Guide/1.jpg" alt=""></p>
-<p><img src="/imgs/NavigationStack_Guide/2.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/1.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/2.jpg" alt=""></p>
 <h3 id="approuter">AppRouter</h3>
 <p>    AppRouter是我用来保存Views常量的，使用enum类型保存数据更贴合数据驱动的NavigationStack的使用方式。</p>
-<p><img src="/imgs/NavigationStack_Guide/3.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/3.jpg" alt=""></p>
 <h3 id="contentview">ContentView</h3>
 <p>    ContentView是我用来实现页面跳转的主要方式，也是我自己摸索出来的方法的核心部分。这里我声明了一个@State var view 配合使用switch来标明需要跳转的View。声明@Binding var path 来传入NavigationPath实现数据控制。</p>
-<p><img src="/imgs/NavigationStack_Guide/4.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/4.jpg" alt=""></p>
 <h3 id="navigationdestination">.navigationDestination</h3>
 <p>    .navigationDestination是NavigationStack的导航索引，它明确了如何使用数据导航，在这里我使用ContentView来接收传入的数据和跳转到相应页面。需要指出来的一点是，开发者可以同时添加多个.navigationDestination来处理多种不同的数据，这里我只演示了ContentView也就是我写的View之间跳转的功能&mdash;&mdash;比如类似Apple官方文档给出来的实例，开发者可以建立一个表格，表格中的每一项数据对应一个CardView。</p>
 <p>此外，只需在root页面添加.navigationDestination即可。</p>
-<p><img src="/imgs/NavigationStack_Guide/5.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/5.jpg" alt=""></p>
 <p>    在上图中，NavigationLink(value: AppRouter.HomeView)的效果完全等价于自定义的Button实现path.append(AppRouter.HomeView)。但是NavigationLink不可以实现多页面跳转，而上图中，点击Go to Setting按钮则可以向path数组中添加AppRouter.HomeView和AppRouter.SettingView这样可以一键跳转到第三页面，从第三页面也可以通过path.removeLast(2)清空path来返回第一页面。</p>
 <p>    想要了解如何使用NavigationStack到这里就结束了，下面是我在测试过程中发现的一个有趣点，感兴趣的朋友们可以看一看。</p>
 <h2 id="一个有趣点">一个有趣点</h2>
 <p>    在测试中我发现dismiss返回跟navigation右上角自带的返回键效果是一样的，但是跟使用path.remove效果略有不同。如下图，我在每一个View使用.onAppear方法输出当前View的path的数量来进行测试。</p>
-<p><img src="/imgs/NavigationStack_Guide/6.jpg" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/6.jpg" alt=""></p>
 <p>    当使用dismiss或者左上角自带的back返回，path的数组数量不会减少（比如这里尽管回到root界面了，path中数量还是1），但是也不会影响跳转到其他界面。而通过path.removeLast返回，则从逻辑上是正确的（比如这里回到root界面，path中数量理论上就是0）。后来我试了试跳转到其他界面，比如跳转到界面2，那么这个时候path堆栈中数量是2，通过dismiss或者自带返回回到界面1，path堆栈中数量还是2.但是从界面1跳转到另外一个界面3，这个时候path堆栈的数量还是2。也就是说并不影响正常使用。但是总感觉怪怪的。</p>
-<p><img src="/imgs/NavigationStack_Guide/7.png" alt=""></p>
+<p><img src="/imgs/2023/NavigationStack_Guide/7.png" alt=""></p>
 <p>后面我又调用下面这段代码延后一秒再次输出一次从HomeView跳转到root信息就为正常的（也就是path数组中的数量为0）</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -297,7 +297,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/imgs/NavigationStack_Guide/8.jpg" alt=""></p>
+</div><p><img src="/imgs/2023/NavigationStack_Guide/8.jpg" alt=""></p>
 <p>猜测通过path.removeLast()方法是直接操作数据源，ui监听到数据源变化而变化，dismiss或自带的返回键时是操作pop，动画结束后修改数据源。</p>
 <p><strong>终</strong></p>
       </article>

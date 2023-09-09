@@ -223,8 +223,8 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>macOS: Ventura 13.3.1
-</span></span><span style="display:flex;"><span>Xcode: 14.3
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>macOS: Ventura 13.5.2
+</span></span><span style="display:flex;"><span>Xcode: 14.3.1
 </span></span><span style="display:flex;"><span>swift: 5.7
 </span></span><span style="display:flex;"><span>SwiftUI: 4.0
 </span></span></code></pre></td></tr></table>
@@ -232,27 +232,27 @@
 </div><h2 id="基础工具">基础工具</h2>
 <p>iOS开发需要用到的语言主要是Swift与Objective-C,ide是mac跟部分iPad独有的Xcode（单有iPhone可不行！）</p>
 <p>Xcode可直接App Store上获取：    </p>
-<p><img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/2.png" alt=""></p>
+<p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/2.png" alt=""></p>
 <p>此外对于初学者可多配备一个SF Symbols，软件描述及下载地址如下：<a href="https://developer.apple.com/sf-symbols/">https://developer.apple.com/sf-symbols/</a></p>
-<p><img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/3.png" alt=""></p>
+<p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/3.png" alt=""></p>
 <h2 id="swift语法学习">swift语法学习</h2>
 <p>swift网上目前没有系统的学习教程，新手可自行查看官方<a href="https://swiftgg.gitbook.io/swift/">中文文档</a>或<a href="https://docs.swift.org/swift-book/">英文文档</a></p>
-<p><img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/4.png" alt="">
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/5.png" alt="">
+<p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/4.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/5.png" alt="">
 需要说明的是，目前国内iOS教程较少，纸质书本教程大多可读性不高或又已经过时，而上面提到的两个电子书其实就是最好的swift学习教程！同学们要学会适应看电子书。</p>
 <h2 id="xcode介绍及使用">Xcode介绍及使用</h2>
 <p>Xcode打开后页面是这样，右边会显示最近项目
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/6.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/6.png" alt="">
 点击“Create a new Xcode project”创建新项目,这里有很多看似很复杂的平台选项，其实很简单。上面一排东西是你想建立工程适合的平台，下面是相应平台工具的类型，一般如果你想练习siwft基本语法可选择：macOS-&gt;Command Line Tool(但是不推荐)。如果你想开发一个移动端app则选择：IOS-&gt;App。
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/7.png" alt="">
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/8.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/7.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/8.png" alt="">
 下面以开发移动端app为例，介绍Xcode主要功能界面。
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/9.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/9.png" alt="">
 这里的“Team”可自行用自己的Apple账号创立一个或者暂时不创立都行。“Organization Identifier”可随意填写，这个功能主要是企业开发或技术成熟的个人开发者会注意考虑。下面的“Interface”跟“Language”可自行选择，这里以较新的“SwiftUI”为例。最下面两个都暂时不选择。
-<img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/10.png" alt="">
+<img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/10.png" alt="">
 关于工程的存放位置需要提醒一点的是，你可以在个人页创建一个名为“Developer”的文件夹，将自动显示为带一个“🔨”标记的特殊文件夹。一般来说将工程文件放在这个文件夹里会比较“正规”。但是，你也可以随便将工程文件夹放在任何你想放的位置。<br>
 下面来介绍Xcode的主要界面及功能：</p>
-<p><img src="/imgs/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/11.png" alt=""></p>
+<p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/11.png" alt=""></p>
 <p><strong>主页面从左到右分为：1.Navigator  2.Maincode  3.Inspector三块（不同地方对这三大块的说法也许不同</strong></p>
 <ul>
 <li>Navigator下的“Assets”是你存放资源的地方，比如你的app的图标和页面插图等等</li>
@@ -277,9 +277,8 @@
 <li>control + I : 规整代码</li>
 </ul>
 <h2 id="啰嗦两句">啰嗦两句</h2>
-<p>iOS开发对于新人不很友好，一方面网上教程较少，另一方面行业更迭速度较快，同时swift语法部分内容较多。对于未接触过其他计算机语言的同学来说入门会比较困难。但是慢慢学，总会有一定收获。  推荐入门自学课程：<strong>斯坦福cs193p</strong>；b站上有搬运
-b站这个up主微型项目也很不错：[嘉夫和子然的工作室的个人空间-哔哩哔哩]<a href="https://b23.tv/OjiPo8V">https://b23.tv/OjiPo8V</a><br>
-说来最近（2022-10）发现b站的iOS开发者越来越多，也提供了不少很好的iOS开发教程，大家共勉！</p>
+<p>iOS开发对于新人不很友好，一方面网上教程较少，另一方面行业更迭速度较快，同时swift语法部分内容较多。对于未接触过其他计算机语言的同学来说入门会比较困难。但是慢慢学，总会有一定收获。  推荐入门自学课程：<strong>斯坦福cs193p</strong>；b站上有搬运。b站还有Chaocode和Udemy的iOS开发课程很不错。
+最近（2023-9）发现b站的iOS开发者越来越多，也提供了不少很好的iOS开发教程，大家共勉！</p>
 <p><strong>～终</strong></p>
       </article>
     </section>

@@ -48,7 +48,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/2023/fontfamily_to_project/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-15T00:51:20+08:00" />
-<meta property="article:modified_time" content="2023-07-13T13:36:28+08:00" />
+<meta property="article:modified_time" content="2023-09-09T14:25:58+08:00" />
 
 
 
@@ -230,24 +230,24 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>    外部字体资源可以在<a href="https://fonts.google.com">谷歌字体</a>资源库里找，都是免费的，而且样式很多。这里我随便搜索到Annie Use Your Telescope字体。</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/1.jpg" alt=""></p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/2.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/1.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/2.jpg" alt=""></p>
 <h2 id="引入工程实例">引入工程实例</h2>
 <p>    这里我创建了一个swiftUI的工程，再创建了一个Storyboard来进行UIkit的演示,这里我也提前创建了Fonts的group.</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/3.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/3.jpg" alt=""></p>
 <p>将解压后的资源的ttf文件拖入到工程下的Fonts下。这里必须注意要勾选Add to targets到工程文件。</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/4.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/4.jpg" alt=""></p>
 <p>在工程的info文件下添加Fonts provided by application字段，并且添加Item 0的value为引入工程的字体文件(注意必须加上.ttf后缀)</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/5.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/5.jpg" alt=""></p>
 <h3 id="uikit示例">UIkit示例</h3>
 <p>在UIkit工程中，现在则可以直接在Font属性中选中font family即可，默认就是预选中引入的字体。</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/6.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/6.jpg" alt=""></p>
 <h3 id="swiftui示例">SwiftUI示例</h3>
 <p>在SwiftUI工程中则需要加上这一段代码。需要注意的是SwiftUI工程中的Preview可能会出现延迟或不显示，想要看到真实效果最好运行工程在模拟器上查看。</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/7.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/7.jpg" alt=""></p>
 <p>这里需要注意的是，你可以随意更改引入工程后的font family的名字和对应的info中的Item的value值，不会对结果产生改变，但是在使用的时候必须使用完整的名称（比如这里我已经把项目中的字体和info中对应值改名为AnnieUse,但是如果我使用AnnieUse则引用失败）</p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/8.jpg" alt=""></p>
-<p><img src="/imgs/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/9.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/8.jpg" alt=""></p>
+<p><img src="/imgs/2023/%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5%E9%A1%B9%E7%9B%AE/9.jpg" alt=""></p>
 <p>终～</p>
       </article>
     </section>
