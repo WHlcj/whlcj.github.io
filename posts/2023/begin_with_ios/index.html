@@ -33,7 +33,7 @@
 
 
 <meta name="author" content="WHlcj" />
-<meta name="description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.4.28）
+<meta name="description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.10.19）
 " />
 
 
@@ -44,7 +44,7 @@
 
 
 <meta property="og:title" content="iOS开发入门" />
-<meta property="og:description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.4.28）" />
+<meta property="og:description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.10.19）" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://whlcj.github.io/posts/2023/begin_with_ios/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-04T23:55:24+08:00" />
@@ -55,7 +55,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="iOS开发入门"/>
-<meta name="twitter:description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.4.28）"/>
+<meta name="twitter:description" content="总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————本入门篇持续更新中！（2023.10.19）"/>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -210,7 +210,7 @@
       <article class="main">
         
 
-        <p>总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————<strong>本入门篇持续更新中！（2023.4.28）</strong></p>
+        <p>总结本人入门iOS踩过的坑，为后来者提供较为轻松的入门教程，本教程会根据iOS开发的更新及发展情况以及本人后续的一些想法不时进行更新或修正————<strong>本入门篇持续更新中！（2023.10.19）</strong></p>
 <p>本教程仅针对想学习iOS但是苦于摸不到门道的初学者。</p>
 <blockquote>
 <p>目前环境：</p>
@@ -223,13 +223,14 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>macOS: Ventura 13.5.2
-</span></span><span style="display:flex;"><span>Xcode: 14.3.1
-</span></span><span style="display:flex;"><span>swift: 5.7
-</span></span><span style="display:flex;"><span>SwiftUI: 4.0
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>macOS: Sonoma 14.0
+</span></span><span style="display:flex;"><span>Xcode: 15.0
+</span></span><span style="display:flex;"><span>swift: 5.9
+</span></span><span style="display:flex;"><span>SwiftUI: 5.0
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="基础工具">基础工具</h2>
+</div><p>需要提醒一下的是入门iOS对swift以及swiftUI的版本要求不是很高，虽然这两个东西版本一直在迭代，但是并不需要你随时掌握最新的特性，个人推荐swift5.5，swiftUI4.0就行，最新的特性往往也不会被推广和适配，企业级开发中使用的是oc+UIkit。</p>
+<h2 id="基础工具">基础工具</h2>
 <p>iOS开发需要用到的语言主要是Swift与Objective-C,ide是mac跟部分iPad独有的Xcode（单有iPhone可不行！）</p>
 <p>Xcode可直接App Store上获取：    </p>
 <p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/2.png" alt=""></p>
@@ -253,12 +254,11 @@
 关于工程的存放位置需要提醒一点的是，你可以在个人页创建一个名为“Developer”的文件夹，将自动显示为带一个“🔨”标记的特殊文件夹。一般来说将工程文件放在这个文件夹里会比较“正规”。但是，你也可以随便将工程文件夹放在任何你想放的位置。<br>
 下面来介绍Xcode的主要界面及功能：</p>
 <p><img src="/imgs/2023/iOS%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/11.png" alt=""></p>
-<p><strong>主页面从左到右分为：1.Navigator  2.Maincode  3.Inspector三块（不同地方对这三大块的说法也许不同</strong></p>
+<p><strong>主页面从左到右分为：1.Navigator  2.Maincode  3.Inspector三块（不同地方对这三大块的说法也许不同。此外，部分元素已在图中标出</strong></p>
 <ul>
-<li>Navigator下的“Assets”是你存放资源的地方，比如你的app的图标和页面插图等等</li>
 <li>Maincode顶上方可选择你需要的模拟器，右边的“▶️”则是搭建工程，且同时运行模拟器</li>
 <li>Inspector的功能则是调整，修改视图的属性。比如这里我就把图中的“Text”的字体大小调整为了“Large Title”</li>
-<li><strong>需要注意的是</strong>主页面你看到的Maincode中的预览只是下面“struct ContentView_Previews”代码的实现。</li>
+<li><strong>需要注意的是</strong>主页面你看到的Maincode中的预览只是下面“#Preview”&mdash;-老版本为“struct ContentView_Previews”但是这两者可以通用&mdash;-代码的实现。</li>
 <li>如果你想进行swift语法练习，（个人推荐）可以在Navigator工程包下新建一个playground文件并将其拖出工程，即可直接进行练习。</li>
 </ul>
 <p>其他具体功能就留给大家自行探索啦～</p>
@@ -277,8 +277,7 @@
 <li>control + I : 规整代码</li>
 </ul>
 <h2 id="啰嗦两句">啰嗦两句</h2>
-<p>iOS开发对于新人不很友好，一方面网上教程较少，另一方面行业更迭速度较快，同时swift语法部分内容较多。对于未接触过其他计算机语言的同学来说入门会比较困难。但是慢慢学，总会有一定收获。  推荐入门自学课程：<strong>斯坦福cs193p</strong>；b站上有搬运。b站还有Chaocode和Udemy的iOS开发课程很不错。
-最近（2023-9）发现b站的iOS开发者越来越多，也提供了不少很好的iOS开发教程，大家共勉！</p>
+<p>iOS开发对于新人不很友好，一方面网上教程较少，另一方面行业更迭速度较快，同时swift语法部分内容较多。对于未接触过其他计算机语言的同学来说入门会比较困难。但是慢慢学，总会有一定收获。  推荐入门自学课程：<strong>斯坦福cs193p</strong>；b站上有搬运，现在已经有2023年的版本。b站还有Chaocode和Udemy的iOS开发课程很不错。 这里只是列出几个我学习过程中接触的几个教程，也许并不适用于你，且每个人接触的资源都不一样，选中其中一两个认真学就好～</p>
 <p><strong>～终</strong></p>
       </article>
     </section>
