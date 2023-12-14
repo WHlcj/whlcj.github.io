@@ -1,0 +1,876 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Git学习笔记 -- 理论篇 | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="2023.12.14更新：将该笔记分为理论和实战两篇，实战部分见Git学习笔记 &amp;ndash; 实战篇
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2022/study_git_1/" />
+
+
+<meta property="og:title" content="Git学习笔记 -- 理论篇" />
+<meta property="og:description" content="2023.12.14更新：将该笔记分为理论和实战两篇，实战部分见Git学习笔记 &ndash; 实战篇" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2022/study_git_1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-23T20:09:10+08:00" />
+<meta property="article:modified_time" content="2022-12-23T20:09:10+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git学习笔记 -- 理论篇"/>
+<meta name="twitter:description" content="2023.12.14更新：将该笔记分为理论和实战两篇，实战部分见Git学习笔记 &ndash; 实战篇"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#git-是什么">Git 是什么？</a></li>
+    <li><a href="#git-基本理论">Git 基本理论</a></li>
+    <li><a href="#git-文件操作">Git 文件操作</a></li>
+    <li><a href="#git-工作区创建">Git 工作区创建</a></li>
+    <li><a href="#git-结构">.git 结构</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=Git%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%20--%20%e7%90%86%e8%ae%ba%e7%af%87&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fstudy_git_1%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fstudy_git_1%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">Git学习笔记 -- 理论篇<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2022-12-23T20:09:10&#43;08:00</span>
+                
+
+              | 4 分钟阅读
+
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>2023.12.14更新：将该笔记分为理论和实战两篇，实战部分见<a href="/posts/2023/study_git_2/">Git学习笔记 &ndash; 实战篇</a></p>
+<h2 id="git-是什么">Git 是什么？</h2>
+<p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency</p>
+<blockquote>
+<p>版本控制是什么？</p>
+</blockquote>
+<p>一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统</p>
+<blockquote>
+<p>为什么需要版本控制？</p>
+</blockquote>
+<p>更好地关注变更，了解每个版本的改动是什么，方便对改动的代码进行检查，预防事故发生；也能够随时切换到不同的版本，回滚误删误改的问题代码</p>
+<blockquote>
+<p>Git与SVN</p>
+</blockquote>
+<ul>
+<li>SVN是集中式管理系统，而Git是分布式版本控制系统。</li>
+<li>SVN的版本库是集中放在中央服务器的，本地不保存代码版本，而Git每个人的电脑都是一个完整的版本库。</li>
+<li>SVN需要联网才能工作，对网络带宽要求较高，而Git工作时不需要联网。</li>
+</ul>
+<blockquote>
+<p>Windows的一些说明</p>
+</blockquote>
+<ul>
+<li>Git Bash是Unix与Linux风格的命令行。</li>
+<li>Git CMD是Windows风格的命令行。</li>
+<li>Git GUI是图形界面的Git，不建议初学者使用，尽量先熟悉常用命令。</li>
+</ul>
+<h2 id="git-基本理论">Git 基本理论</h2>
+<p><strong>Git本地有四个工作区域 :</strong></p>
+<ul>
+<li>
+<p>工作目录(Working Directory) : 就是你平时存放代码的地方。</p>
+</li>
+<li>
+<p>暂存区(Stage/Index) : 用于临时存放你的改动，保存即将提交到文件列表信息。</p>
+</li>
+<li>
+<p>仓库区(Repository或Git Directory) : 就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本。</p>
+</li>
+<li>
+<p>远程仓库(Remote Directory) : 托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换。</p>
+</li>
+</ul>
+<p><img src="/imgs/2022/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2.png" alt=""></p>
+<h2 id="git-文件操作">Git 文件操作</h2>
+<blockquote>
+<p>文件四种状态 :</p>
+</blockquote>
+<ul>
+<li>
+<p>Untracked : 未跟踪，此文件在文件夹中，但没有加入到Git库，不参与版本控制。通过git add .命令可将其状态变为staged。</p>
+</li>
+<li>
+<p>Unmodify : 文件已经入库，未修改，即版本库中的文件快照内容与文件夹中完全一致。这种类型的文件有两种去处，如果它被修改，而变为Modified；如果使用git rm，则成为Untracked文件。</p>
+</li>
+<li>
+<p>Modified : 文件已修改，没有进行其他操作。这个文件也有两个去处，通过git add可进入暂存staged状态，使用git checkout filename则丢弃修改过，返回到unmodify状态。</p>
+</li>
+<li>
+<p>Staged : 暂存状态，执行git   commit将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为unmodify状态。执行git reset HEAD filename取消暂存，文件状态为modified。</p>
+</li>
+</ul>
+<blockquote>
+<p>查看文件状态 :</p>
+</blockquote>
+<p>查看指定文件状态 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git status filename
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看所有文件状态 : (untracked文件显示为红色)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git status
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看commit日志 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在untracked状态下查看修改的文件与原文件的不同 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git diff filename
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>重要指令 :</p>
+</blockquote>
+<p>添加所有文件到暂存区 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git add .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交暂存区中的内容到本地(-m表示提交信息) :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git commit -m &#34;消息内容&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>远程提交 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>忽略文件 :</p>
+</blockquote>
+<p>可以在项目根目录下创建.gitignore文件，并在其中添加要忽略的文件/文件夹名称。</p>
+<p><img src="/imgs/2022/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.png" alt=""></p>
+<p>如果是mac用户，建议第一次上传远程仓库之前都在.gitignore中加入.DS_store(系统自带的存储路径的文件)</p>
+<h2 id="git-工作区创建">Git 工作区创建</h2>
+<p>本地仓库搭建 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>克隆远程仓库 :</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git clone url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>克隆远程仓库后，默认就与之产生了联系，也就是本地有.git的信息以及连接信息，后面可以直接push上传代码！如果使用的是ssh协议还需本地的SSH密钥在远程库有效。  需要注意的是，如果通过下载zip文件解压到本地是没有.git这个文件的，也就是没有关联远程库。</p>
+<h2 id="git-结构">.git 结构</h2>
+<p><img src="/imgs/2022/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/5.png" alt=""></p>
+<p>首先说明，这部分内容很抽象，且不影响实际使用，我这里只做个人能看懂的笔记，若读者想要深入学习git的结构建议自查资料。.git 文件默认情况是隐藏的，Mac 通过 ⌘ + shift + . 来显示隐藏文件夹。使用 tree .git 命令更加直观</p>
+<blockquote>
+<p>Objects</p>
+</blockquote>
+<p>commit / tree / blob / tag 在 git 中统一称为 Objects</p>
+<ul>
+<li>Blob：存储文件的内容</li>
+<li>Tree：存储文件的目录信息</li>
+<li>Commit：存储提交信息，一个 Commit 对应唯一版本的代码</li>
+</ul>
+<p>通过 Commit 寻找到 Tree &ndash;&gt; Blob &ndash;&gt; 文件内容</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>eg:
+</span></span><span style="display:flex;"><span>git cat-file -p commitID    # 得到treeID
+</span></span><span style="display:flex;"><span>git cat-file -p treeID      # 得到blobID
+</span></span><span style="display:flex;"><span>git cat-file -p blobID      # 查看文件内容
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>refs</p>
+</blockquote>
+<ul>
+<li>Branch 一般用于开发阶段，是可以不断添加 Commit 进行迭代的</li>
+<li>Tag 一般表示一个稳定版本，指向的 Commit 一般不会变更</li>
+</ul>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git tag v0.0.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Annotation Tag 是一种特殊的 Tag，可以给 Tag 提供一些额外的信息</li>
+</ul>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git tag -a v0.0.2 -m &#34;add feature 1&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2023 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/me.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AE%9E%E4%B9%A0/" title="实习">
+              实习
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9D%A2%E8%AF%95/" title="面试">
+              面试
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+
