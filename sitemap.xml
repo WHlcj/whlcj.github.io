@@ -2,28 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://whlcj.github.io/posts/2023/xcode_sign/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
-  </url><url>
     <loc>https://whlcj.github.io/categories/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/ios/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/posts/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/</loc>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/posts/2023/url_scheme_course/</loc>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/</loc>
+    <lastmod>2024-01-29T15:22:51+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/posts/2023/xcode_certsigning/</loc>
     <lastmod>2023-12-17T21:15:16+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/xcode/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/</loc>
     <lastmod>2023-12-17T21:15:16+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/git/</loc>

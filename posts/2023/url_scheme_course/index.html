@@ -1,0 +1,798 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>URL Scheme 的介绍和使用 | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="演示的两个 Demo 分别是 Swift 和 OC 版本的，项目地址在这里。下文主要以 OCDemo 进行截图配讲。
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2023/url_scheme_course/" />
+
+
+<meta property="og:title" content="URL Scheme 的介绍和使用" />
+<meta property="og:description" content="演示的两个 Demo 分别是 Swift 和 OC 版本的，项目地址在这里。下文主要以 OCDemo 进行截图配讲。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2023/url_scheme_course/" /><meta property="article:section" content="posts" />
+
+<meta property="article:modified_time" content="2024-01-29T15:22:51+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="URL Scheme 的介绍和使用"/>
+<meta name="twitter:description" content="演示的两个 Demo 分别是 Swift 和 OC 版本的，项目地址在这里。下文主要以 OCDemo 进行截图配讲。"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#实战">实战</a>
+      <ul>
+        <li><a href="#注册-url-schemes">注册 URL Schemes</a></li>
+        <li><a href="#配置-url-schemes-白名单">配置 URL Schemes 白名单</a></li>
+        <li><a href="#app-间跳转">App 间跳转</a></li>
+        <li><a href="#传递参数">传递参数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=URL%20Scheme%20%e7%9a%84%e4%bb%8b%e7%bb%8d%e5%92%8c%e4%bd%bf%e7%94%a8&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2furl_scheme_course%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2furl_scheme_course%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">URL Scheme 的介绍和使用<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2024-01-29T15:22:51&#43;08:00</span>
+                
+
+              | 3 分钟阅读
+
+              
+              | 更新于
+                
+                  <span data-format="luxon">2024-01-29T15:22:51&#43;08:00</span>
+                
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>演示的两个 Demo 分别是 Swift 和 OC 版本的，项目地址<a href="https://github.com/WHlcj/iOS-Practice/tree/main/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/URLSchemeDemo">在这里</a>。下文主要以 OCDemo 进行截图配讲。</p>
+<h2 id="简介">简介</h2>
+<p>URL Scheme 是一个可以让 APP 之间相互跳转的协议。比如：淘宝跳转到支付宝、京东使用微信登陆&hellip;许多场景使用的都是 URL Scheme 协议。</p>
+<blockquote>
+<p>在 iOS 中的特殊性</p>
+</blockquote>
+<p>其实安卓设备也使用了 URL Scheme 协议，但是通常提到 URL Scheme 常常跟 iOS 关联更多。这是因为 Apple 先接入了该协议的使用，并且 iOS 设备可以直接识别 URL Scheme 而安卓设备则不行。<strong>下文中提到的 URL Scheme 都默认是在 iOS 环境中</strong>。eg:
+iOS 中点击下面这个链接可以直接打开微信</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>weixin://  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>tel://123456789         #拨打电话号码 123456789。  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>URL Scheme 的一般格式</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scheme://host:port/path?query
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>scheme 表示协议或方案，用于标识要调用的应用程序。类比 <code>http://xxxx</code> 中的 <code>http</code></li>
+<li>host 表示主机，通常是应用程序的名称或标识符。</li>
+<li>port 表示端口，用于指定连接的端口（可选）。</li>
+<li>path 表示路径，用于指定要执行的操作或导航的位置（可选）。</li>
+<li>query 表示查询参数，用于传递额外的信息（可选）。</li>
+</ul>
+<p>可以简单理解为</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>url_scheme://（传入的）参数
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>URL Scheme 与 URL Schemes</p>
+</blockquote>
+<p>URL Scheme 是指某个 App 支持的单个 URL 协议，而 URL Schemes 则是指一个 App 支持的多个 URL 协议。例如，微信 App 支持多个 URL Scheme：</p>
+<ul>
+<li><code>weixin://</code> ：调起微信 App</li>
+<li><code>weixin://scanqrcode</code> ：直接进入微信扫一扫页面</li>
+<li><code>weixin://dl/moments</code> ：直接进入微信朋友圈页面（已失效）</li>
+<li><code>weixin://dl/settings</code> ：直接进入微信设置页面（已失效）</li>
+</ul>
+<h2 id="实战">实战</h2>
+<p>下面具体介绍如何使用 URL Scheme 实现 App 间跳转</p>
+<h3 id="注册-url-schemes">注册 URL Schemes</h3>
+<blockquote>
+<ol>
+<li>Info.plist 添加 URL types</li>
+</ol>
+</blockquote>
+<p><img src="/imgs/2023/URL_Scheme/1.png" alt=""></p>
+<blockquote>
+<ol start="2">
+<li>添加 URL Schemes</li>
+</ol>
+</blockquote>
+<p>URL types下只自带 URL Identifier，需要点击 &lsquo;+&rsquo; 手动添加 URL Schemes</p>
+<p><img src="/imgs/2023/URL_Scheme/2.png" alt=""></p>
+<blockquote>
+<ol start="3">
+<li>配置 URL Schemes &amp; URL Identifier</li>
+</ol>
+</blockquote>
+<p><img src="/imgs/2023/URL_Scheme/3.png" alt=""></p>
+<p>URL Schemes 必须能唯一标识一个 App，如果你设置的 URL Schemes 与别的 App 的 URL Schemes 冲突时 URL Schemes 生效的优先级: 系统 App &gt; 先装 App &gt; 后装 App。</p>
+<p>URL Identifier 是自定义的 URL schemes 的名字，一般采用反转域名的方法保证该名字的唯一性。</p>
+<p>URL Identifier 在链接中是可选的。完成上面配置后，可以在 Safari 中输入并打开 <code>ocDeme://</code> or <code>ocDemo:com.ocDemo.www</code> 能成功跳转则配置成功。</p>
+<h3 id="配置-url-schemes-白名单">配置 URL Schemes 白名单</h3>
+<p>当我们想要跳转第三方 App 时，通常使用<code>openURL:options:completionHandler:</code>直接跳转，或者先<code>canOpenURL:</code>判断手机内是否安装有目标 App 再跳转。后一种方式的<code>canOpenURL:</code>则依赖于 URL Schemes 白名单。</p>
+<p>iOS 9 后限制了 HTTP 协议的访问，现在需要在 Info.plist 中添加 <code>Queried URL Schemes</code> 并声明本 App 所支持的其他应用程序的 URL Schemes &mdash;&mdash; 如下图 &mdash;&mdash; 告知操作系统可能会查询或与之交互的其他 App，这样才可以正常<strong>检查其他 App 是否安装</strong></p>
+<p><img src="/imgs/2023/URL_Scheme/4.png" alt=""></p>
+<blockquote>
+<p>安全性</p>
+</blockquote>
+<p>虽然直接通过<code>openURL:options:completionHandler:</code>进行跳转也是允许的，不过使用<code>canOpenURL:</code>再进行跳转判断，可以提前发现问题，规避问题。</p>
+<blockquote>
+<p>Queried URL Schemes 与 URL types</p>
+</blockquote>
+<p><code>URL types</code> 里的字段是为了让别的 App 能调起你的 App，而 <code>Queried URL Schemes</code> 是为了让系统允许你的 App 调用别的 App。</p>
+<h3 id="app-间跳转">App 间跳转</h3>
+<blockquote>
+<p>swiftDemo 跳转 ocDemo</p>
+</blockquote>
+<p><img src="/imgs/2023/URL_Scheme/5.png" alt=""></p>
+<blockquote>
+<p>ocDemo 跳转 swiftDemo</p>
+</blockquote>
+<p><img src="/imgs/2023/URL_Scheme/6.png" alt=""></p>
+<h3 id="传递参数">传递参数</h3>
+<p>App 间跳转并传递参数的过程跟 get 方式请求接口类似。在 URL Scheme 中明文添加参数信息，被跳转的 App 调用合适的方法解析。比如这里 swiftDemo 跳转 ocDemo 传入参数<code>user=elee</code></p>
+<p><img src="/imgs/2023/URL_Scheme/7.png" alt=""></p>
+<blockquote>
+<p>iOS 13 之前</p>
+</blockquote>
+<p>直接在 AppDelegate 调用 <code>application(_:open:options:)</code> 或者  <code>application(_:open:sourceApplication:annotation:) (iOS 9后被弃用）</code>处理 URL Scheme。这里不多做介绍，读者可以参考官方文档自行摸索。</p>
+<blockquote>
+<p>iOS 13 之后</p>
+</blockquote>
+<p>需要在 SceneDelegate 调用 <code>scene(_:openURLContexts:)</code> 的方法进行处理。不过也可以去掉 SceneDelegate ，使用 AppDelegate 的方式。</p>
+<p><img src="/imgs/2023/URL_Scheme/8.png" alt=""></p>
+<ul>
+<li><code>URL</code>: 启动 App 的 URL</li>
+<li><code>sourceApplication</code>: 来源 App 的 Bundel ID</li>
+</ul>
+<p><strong>终～</strong></p>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2024 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/me.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AE%9E%E4%B9%A0/" title="实习">
+              实习
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9D%A2%E8%AF%95/" title="面试">
+              面试
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+

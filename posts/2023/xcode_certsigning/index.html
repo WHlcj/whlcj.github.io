@@ -1,0 +1,761 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Behind The Xcode -- iOS 签名机制 | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="感觉这块内容还挺重要的，以前个人开发者时期完全没了解过。实习期遇到这块的内容直接就懵了。所以这里梳理一下相关的应用层的知识。
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2023/xcode_certsigning/" />
+
+
+<meta property="og:title" content="Behind The Xcode -- iOS 签名机制" />
+<meta property="og:description" content="感觉这块内容还挺重要的，以前个人开发者时期完全没了解过。实习期遇到这块的内容直接就懵了。所以这里梳理一下相关的应用层的知识。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2023/xcode_certsigning/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-17T21:15:16+08:00" />
+<meta property="article:modified_time" content="2023-12-17T21:15:16+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Behind The Xcode -- iOS 签名机制"/>
+<meta name="twitter:description" content="感觉这块内容还挺重要的，以前个人开发者时期完全没了解过。实习期遇到这块的内容直接就懵了。所以这里梳理一下相关的应用层的知识。"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#序">序</a></li>
+    <li><a href="#certificates--identifiers--profiles">Certificates &amp; Identifiers &amp; Profiles</a>
+      <ul>
+        <li><a href="#certificate证书">Certificate(证书)</a></li>
+        <li><a href="#identifier标识符">Identifier(标识符)</a></li>
+        <li><a href="#device设备">Device(设备)</a></li>
+      </ul>
+    </li>
+    <li><a href="#apple-开发者账号类型">Apple 开发者账号类型</a></li>
+    <li><a href="#自动签名机制">自动签名机制</a>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#功能">功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#p12-文件">.p12 文件</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=Behind%20The%20Xcode%20--%20iOS%20%e7%ad%be%e5%90%8d%e6%9c%ba%e5%88%b6&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2fxcode_certsigning%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2023%2fxcode_certsigning%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">Behind The Xcode -- iOS 签名机制<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2023-12-17T21:15:16&#43;08:00</span>
+                
+
+              | 3 分钟阅读
+
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>感觉这块内容还挺重要的，以前个人开发者时期完全没了解过。实习期遇到这块的内容直接就懵了。所以这里梳理一下相关的应用层的知识。</p>
+<h2 id="序">序</h2>
+<p>Apple 采用以非对称加密算法为基础的<strong>签名机制</strong>来解决盗版 app 横行的问题，实现闭源生态。本篇不会究其底层原理，只告诉初级开发者必要了解的信息。</p>
+<h2 id="certificates--identifiers--profiles">Certificates &amp; Identifiers &amp; Profiles</h2>
+<p>简单来说，只要你安装了正确的 Certificates 并且在 Xcode 添加了正确的 Profile (描述文件) 就可以真机测试了。而每一个 Profile 相当于一份白名单，以标明正确的开发者使用正确的设备对正确的 app 进行真机测试。名单中每一个成员都由一下部分组成: Certificate &amp; Identifier &amp; Device</p>
+<p><img src="/imgs/2023/iOS%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/1.png" alt=""></p>
+<h3 id="certificate证书">Certificate(证书)</h3>
+<p>标识开发设备。早期需要先在钥匙串申请 CSR 文件，然后在 Apple Developer 上传 CSR 文件来获取。现在可以直接在 Xcode &ndash;&gt; settings &ndash;&gt; Accounts 自动获取。不过若需加入组织开发者账号，需要在 Apple Developer 后台，组织开发者账号管理员添加证书。</p>
+<p>证书分为两种类型:</p>
+<blockquote>
+<p>Development Certificate (开发证书)</p>
+</blockquote>
+<p>开发人员可以通过该设备进行真机测试，可以生成副本&mdash;&mdash;也就是 .p12 文件&mdash;&mdash;供多台电脑安装</p>
+<blockquote>
+<p>Distribution Certificate (发布证书)</p>
+</blockquote>
+<p>开发人员可以通过该设备制作测试版和发布版程序，不可生成副本</p>
+<h3 id="identifier标识符">Identifier(标识符)</h3>
+<p>标识 App。通常指的是 AppID，在工程中可以简单认为 AppID 就是指的 Bundle ID。其实 AppID 完整的形式如下</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>TeamID字符串.BundleID
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>TeamID 字符串是 Apple 根据你的 TeamID 生成的十位字符。下面举例我都用 XXX0XX1XX2 来表示</p>
+<p>实际上 AppID 分为两种:</p>
+<blockquote>
+<p>显示 AppID</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>XXX0XX1XX2.com.elee.test.demo1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>通配 AppID</p>
+</blockquote>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>XXX0XX1XX2.com.elee.test.*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通配 AppID 可能对应着多个 App 比如这里可能对应的是</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>XXX0XX1XX2.com.elee.test.demo1
+</span></span><span style="display:flex;"><span>XXX0XX1XX2.com.elee.test.demo2
+</span></span><span style="display:flex;"><span>XXX0XX1XX2.com.elee.test.haha
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在生成 Profile 时需要 AppID，如果是通配 AppID 那么 Profile 也可能会对应多个 App</p>
+<h3 id="device设备">Device(设备)</h3>
+<p>标识测试设备。可以在 Xcode &ndash;&gt; 运行设备 &ndash;&gt; Manage Destinations 看到 DeviceID 。Device 可以在 Apple Developer 后台，由组织开发者账号管理员进行添加。</p>
+<p><img src="/imgs/2023/iOS%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/2.png" alt=""></p>
+<blockquote>
+<p>如果不使用真机，则只需要 Identifier 就可以运行在模拟器上了，如下图</p>
+</blockquote>
+<p><img src="/imgs/2023/iOS%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/3.png" alt=""></p>
+<h2 id="apple-开发者账号类型">Apple 开发者账号类型</h2>
+<p><img src="/imgs/2023/iOS%E7%AD%BE%E5%90%8D%E6%9C%BA%E5%88%B6/4.png" alt=""></p>
+<p>免费开发者账号是无法进入 Apple Developer 管理后台的，但是在自动签名机制下可以推断 Certificates &amp; Identifiers &amp; Profiles 这些信息在后台是也是存在的。</p>
+<h2 id="自动签名机制">自动签名机制</h2>
+<h3 id="背景">背景</h3>
+<p>在 Xcode 7 之前，只有加入到 Apple Developer Program（即付费）才能进行真机调试，Xcode 7 之后苹果推出了 Automatic signing 功能，只要在 Xcode 上登陆 Apple ID，就会自动管理证书和 Provisioning Profile，同时免费账号也能进行真机调试。</p>
+<h3 id="功能">功能</h3>
+<p>该机制主要会自动创建 Development Certificate 证书并创建或更新 Profile 证书。这个 Profile 保存在 ~/Library/MobileDevice/Provisioning Profile 但是 Apple 后台不会存在这个 Profile。如果在 ~/Library/MobileDevice/Provisioning Profiles 里面删除了该Provisioning Profile文件，Xcode 会马上重新生成 Provisioning Profile</p>
+<h2 id="p12-文件">.p12 文件</h2>
+<p>.12文件是 Development Certificate 的加密副本。因为组织开发者账号的 Certificate 数量有限，所以推出.12文件来供更多的开发者使用。</p>
+<p>本地若有 Development Certificate 则可以在 Keychain Access 生成.12文件发给第三方。第三方双击.12文件，输入密码，则安装成功。具有 Development Certificate 的能力。再配合上有 Development Certificate 的 Profile 文件。则第三方就可以运行开发同一 App</p>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2024 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/me.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AE%9E%E4%B9%A0/" title="实习">
+              实习
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9D%A2%E8%AF%95/" title="面试">
+              面试
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+
