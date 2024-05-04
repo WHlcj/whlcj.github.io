@@ -1,0 +1,838 @@
+
+
+<style type="text/css">
+	.fireworks {
+		position: fixed;
+		pointer-events: none;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
+</style>
+<canvas class="fireworks"></canvas>
+<script src="/js/anime.min.js"></script>
+<script src="/js/fireworks.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CocoaPods 自学笔记 -- 基础篇 | 来自缤纷多彩的灰</title>
+
+    
+
+
+
+
+
+<meta name="author" content="WHlcj" />
+<meta name="description" content="告别了只会 pod init、pod install 的时期～
+" />
+
+
+
+<meta name="generator" content="Hugo 0.105.0">
+
+<link rel="canonical" href="https://whlcj.github.io/posts/2024/study_cocoapods_1/" />
+
+
+<meta property="og:title" content="CocoaPods 自学笔记 -- 基础篇" />
+<meta property="og:description" content="告别了只会 pod init、pod install 的时期～" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2024/study_cocoapods_1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-03T15:28:51+08:00" />
+<meta property="article:modified_time" content="2024-05-03T15:28:51+08:00" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CocoaPods 自学笔记 -- 基础篇"/>
+<meta name="twitter:description" content="告别了只会 pod init、pod install 的时期～"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href= "/css/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href= "/css/github-markdown.css">
+<link rel="stylesheet" href= "/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+
+  
+
+  
+  body.default {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/img/background.jpg);
+    
+  }
+  
+
+  
+</style>
+
+
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default" >
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://whlcj.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+  
+   
+  
+</nav>
+
+
+
+
+    <div class="flip-container" id="contentleft">      
+      <div class="flipper" >
+        <section class="front" >
+          <div class="dream-max-width" >
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#cocoapods-简介">CocoaPods 简介</a>
+      <ul>
+        <li><a href="#为什么要使用-cocoapods-">为什么要使用 CocoaPods ?</a></li>
+        <li><a href="#cocoapods-原理">CocoaPods 原理</a></li>
+        <li><a href="#cocoapods-与-bundler">CocoaPods 与 Bundler</a></li>
+      </ul>
+    </li>
+    <li><a href="#实战部分">实战部分</a>
+      <ul>
+        <li><a href="#编写-podfile">编写 Podfile</a></li>
+        <li><a href="#安装依赖">安装依赖</a></li>
+        <li><a href="#pods-内容">Pods/ 内容</a></li>
+        <li><a href="#版本控制">版本控制</a></li>
+      </ul>
+    </li>
+    <li><a href="#创建自己的私有-pod">创建自己的私有 Pod</a>
+      <ul>
+        <li><a href="#创建步骤">创建步骤</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=CocoaPods%20%e8%87%aa%e5%ad%a6%e7%ac%94%e8%ae%b0%20--%20%e5%9f%ba%e7%a1%80%e7%af%87&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fstudy_cocoapods_1%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fstudy_cocoapods_1%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">CocoaPods 自学笔记 -- 基础篇<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2024-05-03T15:28:51&#43;08:00</span>
+                
+
+              | 4 分钟阅读
+
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>告别了只会 <code>pod init</code>、<code>pod install</code> 的时期～</p>
+<h2 id="cocoapods-简介">CocoaPods 简介</h2>
+<p>CocoaPods 是用 ruby 语言编写的用来管理 iOS 项目的依赖管理器。</p>
+<h3 id="为什么要使用-cocoapods-">为什么要使用 CocoaPods ?</h3>
+<blockquote>
+<p>以前使用第三方库步骤：</p>
+</blockquote>
+<ol>
+<li>拷贝源码</li>
+<li>手动添加 framework</li>
+<li>设置 BuildPhrase</li>
+</ol>
+<p>若有组件升级，需要重新走一遍以上流程。整个流程很繁琐、浪费时间且容易出错！</p>
+<blockquote>
+<p>Use CocoPods：</p>
+</blockquote>
+<ul>
+<li>中心化配置：所有依赖的第三方库都配置到 Podfile 文件下进行依赖和版本控制。便于管理和更新</li>
+<li>一键集成：只需运行 <code>pod install</code> 即可把所有依赖安装进项目中</li>
+<li>自动处理依赖关系</li>
+</ul>
+<h3 id="cocoapods-原理">CocoaPods 原理</h3>
+<p>在 <code>pod install</code> 的时候 CocoaPods 会根据填写在 Podfile 中的名字，在拉取的 source 的 podspec 仓库中找到它们对应的 .podspec 文件。.podspec 文件记录了该依赖的 remote url 和安装方式以及依赖关系。通过 .podspec 就可以将依赖下载并安装到本地项目中。</p>
+<p><img src="/imgs/2024/study_cocoapods/1.png" alt=""></p>
+<h3 id="cocoapods-与-bundler">CocoaPods 与 Bundler</h3>
+<p>除了 CocoaPods 和 Bundler，这里再引入一个 RVM 工具。</p>
+<blockquote>
+<p>RVM 与 Ruby</p>
+</blockquote>
+<p>RVM 是一个管理多个 Ruby 环境的工具，可以提供一个便捷的多版本 Ruby 环境的管理和切换。通过 RVM 我们可以轻松的切换 Ruby 的版本，从而使用不同的 Ruby 环境。</p>
+<blockquote>
+<p>Ruby 和 RubyGem</p>
+</blockquote>
+<p>RubyGems 简称 Gem，是一个用于对 Ruby 组件进行管理及打包的工具。通过 Gem 我们可以管理多个 Ruby 工具集。在日常 <code>gem install xxx</code> 的时候，其实是通过 rubygems.org 网站去查询对应的 Gem Package。<br>
+我们日常用到的很多工具都是一个 Gem 工具，例如：Bundler、CocoaPods、Fastlane 等等。</p>
+<blockquote>
+<p>CocoaPods 和 Bundler （Bundle）</p>
+</blockquote>
+<p>Bundler 是一个 Ruby 工具，是一个 Gem。Bundler 是用来管理维护项目中依赖的 Gem 的工具。如果我们用一个 iOS （Android、JavaScript、Python）工程来类比一个 Ruby 工程，Bundler 就相当于工程中的 CocoaPods（Gradle、npm 或者 yarn、pypi）。<br>
+Bundler 这个工具中，也有对应的来描述这个工程的依赖关系的文件 &ndash; Gemfile 。其中使用 Ruby 的语法来描述工程所需依赖、版本等信息。<br>
+CocoaPods 是一个 Ruby 的工具，所以可以使用 Bundler 来管理。通过 Bundler 中的 Gemfile 的描述文件，我们可以来管理项目中使用的 CocoaPods 及 CocoaPods 版本，以及需要安装的插件（特别是为工程而订制的插件）。</p>
+<h2 id="实战部分">实战部分</h2>
+<h3 id="编写-podfile">编写 Podfile</h3>
+<p><img src="/imgs/2024/study_cocoapods/2.png" alt=""></p>
+<p>其中的 <code>source</code> 、<code>workspace</code> 如果你不修改的话，默认不用显性声明，<code>inhibit_all_warnings!</code>是可选配置。</p>
+<h3 id="安装依赖">安装依赖</h3>
+<p><code>pod install</code> 后，新增 Podfile.lock、Pods/、xxx.xcworkspace</p>
+<ul>
+<li>Podfile.lock: 第一次pod install后生成的文件，Podfile.lock 中会标注项目当前依赖库的准确版本，其中包括了项目在 Podfile 中直接标注使用的库，以及这些库依赖的其他库。</li>
+<li>xxx.xcworkspace: 组织了 xxx.xcodeproj 和 Pods.xcodeporj 后续在这个工作区开发</li>
+<li>Pods/ : 所有 Pod 的目录，每一个 Pod 对应 Pods 的一个 target 这个 target 最终会被打包为一个静态库 .a 。工程还有一个 Pods-xxx 的 target 最终打包为一个总的 Pods-xxx.a 被项目所依赖。</li>
+</ul>
+<p><img src="/imgs/2024/study_cocoapods/3.png" alt=""></p>
+<h3 id="pods-内容">Pods/ 内容</h3>
+<ul>
+<li>各个 Pod 包括：
+<ul>
+<li>源码</li>
+<li>.xcconfig：编译说明书</li>
+<li>.pch：预编译处理文件</li>
+<li>.dummy.m：类的空实现</li>
+</ul>
+</li>
+<li>Pods-xxx 额外包括：
+<ul>
+<li>debug/release.xcconfig：对应主 Project &ndash;&gt; Info &ndash;&gt; Configurations 里的 xcconfig</li>
+<li>resources.sh：编译或处理 .storyboard、.xcassets 等资源文件</li>
+<li>framework.sh：用于实现 framework 类型第三方库的链接</li>
+</ul>
+</li>
+<li>Headers：头文件的软链接，<code>HEADER_SEARCH_PATHS</code> 的搜索目录</li>
+<li>Mainfest.lock：Podfile.lock 的拷贝文件</li>
+<li>Target Support Files：存放 build 时所依赖的一些文件</li>
+</ul>
+<h3 id="版本控制">版本控制</h3>
+<ul>
+<li>Pod/：因为这里面的 Pod 文件本身有 Pod 各自的远程仓库去存放。无需加入版本控制，在 .gitignore 里申明忽略就好。</li>
+<li>Podfile.lock：可以保证 <code>pod install</code> 后依赖的第三方库版本一致。不会出现 UserA <code>pod install</code> 后，某个依赖升级，导致后面 UserB <code>pod install</code> 工程里某个依赖版本跟 UserA 不一样的情况。</li>
+</ul>
+<h2 id="创建自己的私有-pod">创建自己的私有 Pod</h2>
+<h3 id="创建步骤">创建步骤</h3>
+<ol>
+<li>创建 Pod 工程</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pod lib create PodName
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>编写代码</li>
+<li>编写 .podspec 文件</li>
+</ol>
+<p><img src="/imgs/2024/study_cocoapods/4.png" alt=""></p>
+<ol start="4">
+<li>提交代码，按照 .podspec 中的 .version 打 tag</li>
+<li>校验 .podspec 文件，包括语法规则和内容完整性等</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-.sh" data-lang=".sh"><span style="display:flex;"><span><span style="color:#6272a4"># 项目中若有依赖静态库，则需要 --uer-libraries</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 在Pod中warnings都会被当成error，所以需要忽略 --allow-warnings</span>
+</span></span><span style="display:flex;"><span>pod lib lint --use-libraries --allow-warnings 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>创建 podsepc 远程仓库</li>
+<li>将 podspec 远程仓库拉取到本地</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pod repo add RepoName url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>将 .podspec 文件推送到远程仓库</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 根据情况在项目中加入 --uer-libraries 和 --allow-warnings</span>
+</span></span><span style="display:flex;"><span>pod repo push RepoName xxx.podspec
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用">使用</h3>
+<p>要在项目中使用创建的私有 Pod，则需要在 Podfile 中添加</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">source</span> <span style="color:#f1fa8c">&#39;https://xxxx&#39;</span>    <span style="color:#6272a4"># 或者 @git...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
+    </article>
+
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+
+              <span id="run-time"></span>
+
+              
+              <p>© 2021 - 2024 <a href="https://whlcj.github.io"> 🌟来自缤纷多彩的灰 </a>| Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+              
+
+              
+              
+               
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            
+
+
+
+<header class="ui basic very padded segment dream-header">
+
+  
+  <div class="ui small circular image">
+    <img src="/img/me.jpg" alt="avatar" />
+  </div>
+  
+    
+
+  <div class="content">
+    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/cccc/" title="cccc">
+              cccc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/cocoapods/" title="cocoapods">
+              cocoapods
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/git/" title="git">
+              git
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/github/" title="github">
+              github
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
+              Hackathon
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/hugo/" title="hugo">
+              hugo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ios/" title="iOS">
+              iOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/jdbc/" title="JDBC">
+              JDBC
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/linux/" title="linux">
+              linux
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/macos/" title="MacOS">
+              MacOS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="MySQL">
+              MySQL
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/python/" title="python">
+              python
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
+              ubuntu
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/wwdc/" title="wwdc">
+              wwdc
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/xcode/" title="Xcode">
+              Xcode
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
+              仿造品
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
+              大数据
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
+              字符画
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%AE%9E%E4%B9%A0/" title="实习">
+              实习
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
+              生活随想
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
+              词云
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
+              随机验证码
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E9%9D%A2%E8%AF%95/" title="面试">
+              面试
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:1369352274@qq.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/WHlcj" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel= "license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。转载请注明原文地址及作者。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/whlcj.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "black"
+  window.defaultDark =  null 
+  window.backgroundDark =  null 
+  window.backgroundImageDark =  null 
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+    <script src="/js/custom.js"></script>
+    
+
+    
+
+
+    
+
+
+
+
+
+
+  </body>
+  
+
+
+
+
+
+
+
+
+</html>
+
+
