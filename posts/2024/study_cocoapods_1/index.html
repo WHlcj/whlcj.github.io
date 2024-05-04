@@ -264,12 +264,12 @@
 <blockquote>
 <p>CocoaPods 和 Bundler （Bundle）</p>
 </blockquote>
-<p>Bundler 是一个 Ruby 工具，是一个 Gem。Bundler 是用来管理维护项目中依赖的 Gem 的工具。如果我们用一个 iOS （Android、JavaScript、Python）工程来类比一个 Ruby 工程，Bundler 就相当于工程中的 CocoaPods（Gradle、npm 或者 yarn、pypi）。<br>
-Bundler 这个工具中，也有对应的来描述这个工程的依赖关系的文件 &ndash; Gemfile 。其中使用 Ruby 的语法来描述工程所需依赖、版本等信息。<br>
-CocoaPods 是一个 Ruby 的工具，所以可以使用 Bundler 来管理。通过 Bundler 中的 Gemfile 的描述文件，我们可以来管理项目中使用的 CocoaPods 及 CocoaPods 版本，以及需要安装的插件（特别是为工程而订制的插件）。</p>
+<p>Bundler 是一个 Ruby 工具，是一个 Gem。Bundler 是用来管理项目中 Gem 依赖和版本的工具。如果我们用一个 iOS （Android、JavaScript、Python）工程来类比一个 Ruby 工程，Bundler 就相当于工程中的 CocoaPods（Gradle、npm 或者 yarn、pypi）。<br>
+Bundler 这个工具中，也有对应的来描述这个工程的依赖关系的文件 &ndash; Gemfile 。其中使用 Ruby 的语法来描述工程所需依赖、版本等信息。</p>
+<p><img src="/imgs/2024/study_cocoapods/2.png" alt=""></p>
 <h2 id="实战部分">实战部分</h2>
 <h3 id="编写-podfile">编写 Podfile</h3>
-<p><img src="/imgs/2024/study_cocoapods/2.png" alt=""></p>
+<p><img src="/imgs/2024/study_cocoapods/3.png" alt=""></p>
 <p>其中的 <code>source</code> 、<code>workspace</code> 如果你不修改的话，默认不用显性声明，<code>inhibit_all_warnings!</code>是可选配置。</p>
 <h3 id="安装依赖">安装依赖</h3>
 <p><code>pod install</code> 后，新增 Podfile.lock、Pods/、xxx.xcworkspace</p>
@@ -278,7 +278,7 @@ CocoaPods 是一个 Ruby 的工具，所以可以使用 Bundler 来管理。通�
 <li>xxx.xcworkspace: 组织了 xxx.xcodeproj 和 Pods.xcodeporj 后续在这个工作区开发</li>
 <li>Pods/ : 所有 Pod 的目录，每一个 Pod 对应 Pods 的一个 target 这个 target 最终会被打包为一个静态库 .a 。工程还有一个 Pods-xxx 的 target 最终打包为一个总的 Pods-xxx.a 被项目所依赖。</li>
 </ul>
-<p><img src="/imgs/2024/study_cocoapods/3.png" alt=""></p>
+<p><img src="/imgs/2024/study_cocoapods/4.png" alt=""></p>
 <h3 id="pods-内容">Pods/ 内容</h3>
 <ul>
 <li>各个 Pod 包括：
@@ -322,7 +322,7 @@ CocoaPods 是一个 Ruby 的工具，所以可以使用 Bundler 来管理。通�
 <li>编写代码</li>
 <li>编写 .podspec 文件</li>
 </ol>
-<p><img src="/imgs/2024/study_cocoapods/4.png" alt=""></p>
+<p><img src="/imgs/2024/study_cocoapods/5.png" alt=""></p>
 <ol start="4">
 <li>提交代码，按照 .podspec 中的 .version 打 tag</li>
 <li>校验 .podspec 文件，包括语法规则和内容完整性等</li>
