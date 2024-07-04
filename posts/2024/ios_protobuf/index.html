@@ -24,7 +24,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JDBC学习笔记 | 来自缤纷多彩的灰</title>
+    <title>快速上手 iOS Protocol Buffer | 来自缤纷多彩的灰</title>
 
     
 
@@ -33,29 +33,29 @@
 
 
 <meta name="author" content="WHlcj" />
-<meta name="description" content="以及IDEA常用快捷键汇总
+<meta name="description" content="本文主要介绍在 iOS 开发中如何快速上手使用 Protobuf。更多关于 Protobuf 的介绍和相关的功能 api，读者可自行查阅官网。
 " />
 
 
 
 <meta name="generator" content="Hugo 0.105.0">
 
-<link rel="canonical" href="https://whlcj.github.io/posts/2022/study_note_of_jdbc/" />
+<link rel="canonical" href="https://whlcj.github.io/posts/2024/ios_protobuf/" />
 
 
-<meta property="og:title" content="JDBC学习笔记" />
-<meta property="og:description" content="以及IDEA常用快捷键汇总" />
+<meta property="og:title" content="快速上手 iOS Protocol Buffer" />
+<meta property="og:description" content="本文主要介绍在 iOS 开发中如何快速上手使用 Protobuf。更多关于 Protobuf 的介绍和相关的功能 api，读者可自行查阅官网。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://whlcj.github.io/posts/2022/study_note_of_jdbc/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-08-09T15:33:07+08:00" />
-<meta property="article:modified_time" content="2023-09-09T14:25:58+08:00" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2024/ios_protobuf/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-04T21:53:04+08:00" />
+<meta property="article:modified_time" content="2024-07-04T21:53:04+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JDBC学习笔记"/>
-<meta name="twitter:description" content="以及IDEA常用快捷键汇总"/>
+<meta name="twitter:title" content="快速上手 iOS Protocol Buffer"/>
+<meta name="twitter:description" content="本文主要介绍在 iOS 开发中如何快速上手使用 Protobuf。更多关于 Protobuf 的介绍和相关的功能 api，读者可自行查阅官网。"/>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -149,10 +149,10 @@
     <div class="ui segment toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#零idea常用快捷键">零、IDEA常用快捷键</a></li>
-    <li><a href="#一基础部分">一、基础部分</a></li>
-    <li><a href="#二api详解">二、API详解：</a></li>
-    <li><a href="#三数据库连接池">三、数据库连接池</a></li>
+    <li><a href="#安装-protobuf-工具">安装 Protobuf 工具</a></li>
+    <li><a href="#创建-proto-文件">创建 .proto 文件</a></li>
+    <li><a href="#ocswift-代码生成">OC、Swift 代码生成</a></li>
+    <li><a href="#在-ios-工程中的使用">在 iOS 工程中的使用</a></li>
   </ul>
 </nav>
     </div>
@@ -167,10 +167,10 @@
     onclick="savePostAsImg()">
     <i class="save icon"></i>
   </button>
-  <a href="https://twitter.com/intent/tweet?text=JDBC%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fstudy_note_of_jdbc%2f" class="ui circular twitter icon button">
+  <a href="https://twitter.com/intent/tweet?text=%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b%20iOS%20Protocol%20Buffer&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fios_protobuf%2f" class="ui circular twitter icon button">
     <i class="twitter icon"></i>
   </a>
-  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2022%2fstudy_note_of_jdbc%2f" class="ui circular facebook icon button">
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fios_protobuf%2f" class="ui circular facebook icon button">
     <i class="facebook icon"></i>
   </a>
 </div>
@@ -183,7 +183,7 @@
       <header>
 
 
-        <h1 class="ui large header">JDBC学习笔记<span class="sub header">
+        <h1 class="ui large header">快速上手 iOS Protocol Buffer<span class="sub header">
             <span class="left">
               @
               
@@ -193,16 +193,11 @@
               
 
               | 
-                  <span data-format="luxon">2022-08-09T15:33:07&#43;08:00</span>
+                  <span data-format="luxon">2024-07-04T21:53:04&#43;08:00</span>
                 
 
-              | 5 分钟阅读
+              | 2 分钟阅读
 
-              
-              | 更新于
-                
-                  <span data-format="luxon">2023-09-09T14:25:58&#43;08:00</span>
-                
               
             </span>
 
@@ -214,150 +209,31 @@
       <article class="main">
         
 
-        <p>以及IDEA常用快捷键汇总</p>
-<h2 id="零idea常用快捷键">零、IDEA常用快捷键</h2>
-<blockquote>
-<p>快速生成语句</p>
-</blockquote>
+        <p>本文主要介绍在 iOS 开发中如何<strong>快速上手使用 Protobuf</strong>。更多关于 Protobuf 的介绍和相关的功能 api，读者可自行<a href="https://protobuf.dev">查阅官网</a>。</p>
+<p>Protocol Buffer（简称 Protobuf）是一种由Google开发的语言中立、平台无关的序列化数据结构的方法。它允许你定义结构化的数据，并提供一种高效且灵活的方式进行数据序列化和反序列化。</p>
+<h2 id="安装-protobuf-工具">安装 Protobuf 工具</h2>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>main(): psvm+回车
-</span></span><span style="display:flex;"><span>输出语句: sout+回车
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>brew install protobuf           // 支持生成.h和.m文件，和其他多种语言的文件
+</span></span><span style="display:flex;"><span>brew install swift-protobuf     // 支持生成.swift文件
 </span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
-<p>内容辅助键</p>
-</blockquote>
+</div><p>检查是否安装成功：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>内容提示与代码补全: Ctrl+Alt+space
-</span></span><span style="display:flex;"><span>左补全: Ctrl+Alt+v
-</span></span><span style="display:flex;"><span>包裹代码: Ctrl+alt+t
-</span></span><span style="display:flex;"><span>单行注释: Ctrl+/
-</span></span><span style="display:flex;"><span>多行注释: Ctrl+Shift+/
-</span></span><span style="display:flex;"><span>规整代码: Ctrl+Alt+L
-</span></span><span style="display:flex;"><span>统一替换: Ctrl+r
-</span></span><span style="display:flex;"><span>整列编辑: Alt+鼠标左键
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>protoc --version
+</span></span><span style="display:flex;"><span>protoc-gen-swift --version
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="一基础部分">一、基础部分</h2>
-<blockquote>
-<p>1．基础概念：</p>
-</blockquote>
-<p>（1）JCDB(Java DataBase Connectivity):使用Java语言操作关系型数据库的一套API。是官方定义的一套操作所有关系型数据库的规则，
-即接口。各个数据库厂商去实现这套接口，提供数据库驱动jar包。我们可以使用这套接口(JDBC)编程，真正执行的代码是驱动jar包中的实现类。<br>
-（2）127.0.0.1是回送地址，指本地机，一般用来测试使用。回送地址（127.x.x.x）是本机回送地址（Loopback Address），
-即主机IP堆栈内部的IP地址，主要用于网络软件测试以及本地机进程间通信，无论什么程序，一旦使用回送地址发送数据，
-协议软件立即返回，不进行任何网络传输。<br>
-（3）查询本地ip地址: cmd命令窗口输入:ipconfig	,IPv4就是本机ip地址<br>
-（4）文件夹中: shift+右键启动Powershell窗口<br>
-（5）查看当前代码针对的路径: System.out.println(System.getProperty(&ldquo;user.dir&rdquo;));</p>
-<blockquote>
-<p>2．快速入门:</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）创建工程，导入驱动jar包
-</span></span><span style="display:flex;"><span>（2）注册驱动: Class.forName(“com.mysql.cj.jdbc.Driver”);	（MySQL5之后的驱动jar包可以省略这一步骤）
-</span></span><span style="display:flex;"><span>（3）获取连接: Connection conn = DriverManager.getConnection(url,username,password);
-</span></span><span style="display:flex;"><span>（4）定义SQL语句: String sql = “update...”;
-</span></span><span style="display:flex;"><span>（5）获取执行SQL对象: Statement stmt = conn.createStatement();
-</span></span><span style="display:flex;"><span>（6）执行: SQL:stmt.executeUpdate(sql);
-</span></span><span style="display:flex;"><span>（7）返回处理结果
-</span></span><span style="display:flex;"><span>（8）释放资源: 
-</span></span><span style="display:flex;"><span>      ①stmt.close();
-</span></span><span style="display:flex;"><span>      ②conn.close();
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="二api详解">二、API详解：</h2>
-<blockquote>
-<p>1．DriverManager</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）注册驱动  
-</span></span><span style="display:flex;"><span>（2）获取连接  
-</span></span><span style="display:flex;"><span>    ①参数键值对:Url：jdbc:mysql://ip地址:端口号/数据库名称?参数键值对1&amp;参数键值对2...  
-</span></span><span style="display:flex;"><span>    ②细节:如果是本机mysql服务器，并且mysql服务默认端口是3306，则url可以简写为:	Jdbc:mysql///数据库名称?  
-</span></span><span style="display:flex;"><span>（3）参数键值对
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>2．Connection</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）获取执行SQL对象
-</span></span><span style="display:flex;"><span>    ①普通执行SQL对象:  Statement  createStatement()
-</span></span><span style="display:flex;"><span>    ②预编译SQL的执行SQL对象防止SQL注入:  
-</span></span><span style="display:flex;"><span>PreparedStatement  prepareStatement(sql)
-</span></span><span style="display:flex;"><span>（2）事务管理
-</span></span><span style="display:flex;"><span>    ①开启事务:  setAutoCommit(boolean autoCommit):  true为自动提交事务;false为手动提交事务，即开启事务
-</span></span><span style="display:flex;"><span>    ②提交事务:  commit()
-</span></span><span style="display:flex;"><span>    ③回滚事务:  rollback()
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>3．Statement</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）执行SQL语句
-</span></span><span style="display:flex;"><span>    ①执行DML、DDL语句: int  executeUpdate(sql)
-</span></span><span style="display:flex;"><span>    ②执行DQL语句: ResultSet  excuteQuery(sql)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>4．ResultSet</p>
-</blockquote>
+</div><h2 id="创建-proto-文件">创建 .proto 文件</h2>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -372,25 +248,78 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）封装了DQL查询语句的结果:  ResultSet stmt.executeQuery(sql):  执行DQL语句,返回ResultSet对象
-</span></span><span style="display:flex;"><span>（2）获取查询结果:  
-</span></span><span style="display:flex;"><span>    ①Boolean  next()
-</span></span><span style="display:flex;"><span>      1）将光标从当前位置向前移动一行
-</span></span><span style="display:flex;"><span>      2）判断当前行是否为有效行: 返回true为有效行有数据。返回false无效行无数据
-</span></span><span style="display:flex;"><span>    ②getxxx(参数):获取数据
-</span></span><span style="display:flex;"><span>      1）getInt(参数):
-</span></span><span style="display:flex;"><span>      2）SgetString(参数)
-</span></span><span style="display:flex;"><span>    ③参数
-</span></span><span style="display:flex;"><span>      1）Int: 列的编号，从1开始
-</span></span><span style="display:flex;"><span>      2）String: 列的名称
-</span></span><span style="display:flex;"><span>    ④使用:  数据类型 标识符 = rs.getxxx(参数);
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// 使用V3语法
+</span></span><span style="display:flex;"><span>syntax = &#34;proto3&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// OC语言可选，添加模型文件前缀
+</span></span><span style="display:flex;"><span>option objc_class_prefix = &#34;MY&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// message代表一个模型
+</span></span><span style="display:flex;"><span>message Test {
+</span></span><span style="display:flex;"><span>    string title = 1;
+</span></span><span style="display:flex;"><span>    int32 tag = 2;
+</span></span><span style="display:flex;"><span>    Request request = 3;        // 自定义的 Request 类型
+</span></span><span style="display:flex;"><span>    repeated string values = 4; // 数组
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message Request {
+</span></span><span style="display:flex;"><span>    string url = 1;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
-<p>5．PreparedStatement(默认关闭)</p>
-</blockquote>
+</div><h2 id="ocswift-代码生成">OC、Swift 代码生成</h2>
+<p>Protobuf 提供api用于根据.proto文件生成代码，需传入两个参数，生成结果与参数的传入顺序无关：</p>
+<ol>
+<li>.proto 文件的<strong>路径</strong>（下文中用 source_path 表示）</li>
+<li>需要生成的<strong>目标语言</strong>（下文用 target_language 表示）以及文件的<strong>输出路径</strong>（下文用 target_path 表示）</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>protoc source_path/xxx.proto --target_language_out=target_path
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>eg:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>protoc --objc_out=. xxx.proto      // 在当前文件夹根据xxx.proto生成.h和.m文件
+</span></span><span style="display:flex;"><span>protoc xxx.proto --swift_out=.     // 在当前文件夹根据xxx.proto生成.swift文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="在-ios-工程中的使用">在 iOS 工程中的使用</h2>
+<ol>
+<li>工程添加依赖</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pod &#39;Protobuf&#39;          // OC和其他多种语言的能力依赖
+</span></span><span style="display:flex;"><span>pod &#39;SwiftProtobuf&#39;     // swift能力依赖
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>把转换后的代码文件加入到工程。</li>
+<li>跟正常使用某个类的方法一样。</li>
+</ol>
+<ul>
+<li>Swift eg:</li>
+</ul>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -405,101 +334,115 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）作用:
-</span></span><span style="display:flex;"><span>    ①预编译SQL语句并执行,性能更高——只检查和编译一次SQL。
-</span></span><span style="display:flex;"><span>    ②预防SQL注入问题——将敏感字符进行转义
-</span></span><span style="display:flex;"><span>（2）SQL注入: 通过操作输入来修改事先定义好的SQL语句，用以达到执行代码对服务器进行攻击的方法
-</span></span><span style="display:flex;"><span>（3）获取PreparedStatement对象
-</span></span><span style="display:flex;"><span>    ①SQL语句中的参数值用？占位符替代: String sql = “select * from user where username = ? and password = ?”
-</span></span><span style="display:flex;"><span>    ②通过Connection对象获取，并传入对应的sql语句:PreparedStatement pstmt = conn.prepareStatement(sql);
-</span></span><span style="display:flex;"><span>    ③设置参数值:	PrepareStatement对象: setXXX(参数1，参数2):给？赋值
-</span></span><span style="display:flex;"><span>    ④参数: 
-</span></span><span style="display:flex;"><span>      1）参数1: ？的位置编号，从1开始
-</span></span><span style="display:flex;"><span>      2）参数2: ？的值
-</span></span><span style="display:flex;"><span>    ⑤执行SQL: executeUpdate();/excuteQuery();——不需要再传递sql
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>/*
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     &#34;title&#34;: &#34;test&#34;,
+</span></span><span style="display:flex;"><span>     &#34;tag&#34;: 1,
+</span></span><span style="display:flex;"><span>     &#34;request&#34;: {
+</span></span><span style="display:flex;"><span>         &#34;url&#34;: &#34;www.fivehow.com&#34;
+</span></span><span style="display:flex;"><span>     },
+</span></span><span style="display:flex;"><span>     &#34;values&#34;: [&#34;value1&#34;, &#34;value2&#34;]
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> */
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>let request = Request.with { $0.url = &#34;www.whlcj.github.io&#34; }
+</span></span><span style="display:flex;"><span>// ProtoBuf data
+</span></span><span style="display:flex;"><span>let test = Test.with {
+</span></span><span style="display:flex;"><span>    $0.title = &#34;test&#34;
+</span></span><span style="display:flex;"><span>    $0.tag = 1
+</span></span><span style="display:flex;"><span>    $0.request = request
+</span></span><span style="display:flex;"><span>    $0.values = [&#34;value1&#34;, &#34;value2&#34;]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>let binaryData = try? test.serializedData()
+</span></span><span style="display:flex;"><span>guard let binaryData = binaryData else { return }
+</span></span><span style="display:flex;"><span>_ = try? Test(serializedData: binaryData)
+</span></span><span style="display:flex;"><span>// Json Data
+</span></span><span style="display:flex;"><span>let jsonStr = &#34;{\&#34;title\&#34;:\&#34;test\&#34;, \&#34;tag\&#34;:1, \&#34;request\&#34;:{\&#34;url\&#34;:\&#34;www.whlcj.github.io\&#34;},\&#34;values\&#34;:[\&#34;value1\&#34;, \&#34;value2\&#34;]}&#34;
+</span></span><span style="display:flex;"><span>let jsonStrData = jsonStr.data(using: .utf8)
+</span></span><span style="display:flex;"><span>// 对比 data length
+</span></span><span style="display:flex;"><span>print(&#34;binaryData: \(binaryData.count)&#34;)            // 43
+</span></span><span style="display:flex;"><span>guard let jsonStrData = jsonStrData else { return }
+</span></span><span style="display:flex;"><span>print(&#34;jsonStrData: \(jsonStrData.count)&#34;)          // 92
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="三数据库连接池">三、数据库连接池</h2>
-<blockquote>
-<p>1．简介:</p>
-</blockquote>
-<p>数据库连接池是一个容器，负责分配，管理数据库连接。它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个;释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏</p>
-<blockquote>
-<p>2．好处:</p>
-</blockquote>
+</div><ul>
+<li>Objective-C eg:</li>
+</ul>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）资源重用
-</span></span><span style="display:flex;"><span>（2）提升系统响应速度
-</span></span><span style="display:flex;"><span>（3）避免数据库连接遗漏
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>3．实现：</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）标准接口: DataSource
-</span></span><span style="display:flex;"><span>    ①获取连接:  Connection getConnection()
-</span></span><span style="display:flex;"><span>（2）常见的数据库连接池:
-</span></span><span style="display:flex;"><span>    ①DBCP
-</span></span><span style="display:flex;"><span>    ②C3P0
-</span></span><span style="display:flex;"><span>    ③Druid:阿里巴巴开源的数据库连接池项目。功能强大，性能优秀，是Java语言最好的数据库连接池之一
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>4．Driud使用步骤</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）导入jar包
-</span></span><span style="display:flex;"><span>（2）定义配置文件
-</span></span><span style="display:flex;"><span>（3）加载配置文件
-</span></span><span style="display:flex;"><span>（4）获取数据库连接池对象
-</span></span><span style="display:flex;"><span>（5）获取连接
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>5．注意</p>
-</blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）Java的int类型有默认值为0，需注意使用integer类型（默认值为null）;
-</span></span><span style="display:flex;"><span>（2）实际操作思路:
-</span></span><span style="display:flex;"><span>    ①查询:查询所有数据
-</span></span><span style="display:flex;"><span>    ②添加:添加数据
-</span></span><span style="display:flex;"><span>    ③修改:根据id修改
-</span></span><span style="display:flex;"><span>    ④删除:根据id删除
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>/*
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     &#34;title&#34;: &#34;test&#34;,
+</span></span><span style="display:flex;"><span>     &#34;tag&#34;: 1,
+</span></span><span style="display:flex;"><span>     &#34;request&#34;: {
+</span></span><span style="display:flex;"><span>         &#34;url&#34;: &#34;www.fivehow.com&#34;
+</span></span><span style="display:flex;"><span>     },
+</span></span><span style="display:flex;"><span>     &#34;values&#34;: [&#34;value1&#34;, &#34;value2&#34;]
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> */
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// ProtoBuf data
+</span></span><span style="display:flex;"><span>MYTest *test = [[MYTest alloc] init];
+</span></span><span style="display:flex;"><span>test.title = @&#34;test&#34;;
+</span></span><span style="display:flex;"><span>test.tag = 1;
+</span></span><span style="display:flex;"><span>test.valuesArray = [NSMutableArray arrayWithObjects:@&#34;value1&#34;, @&#34;value2&#34;, nil];
+</span></span><span style="display:flex;"><span>MYRequest *request = [[MYRequest alloc] init];
+</span></span><span style="display:flex;"><span>request.URL = @&#34;www.whlcj.github.io&#34;;
+</span></span><span style="display:flex;"><span>test.request = request;
+</span></span><span style="display:flex;"><span>NSData *protoBufData = [test data];
+</span></span><span style="display:flex;"><span>// Json Data
+</span></span><span style="display:flex;"><span>NSString* jsonStr = @&#34;{\&#34;title\&#34;:\&#34;test\&#34;, \&#34;tag\&#34;:1, \&#34;request\&#34;:{\&#34;url\&#34;:\&#34;www.whlcj.github.io\&#34;},\&#34;values\&#34;:[\&#34;value1\&#34;, \&#34;value2\&#34;]}&#34;;
+</span></span><span style="display:flex;"><span>NSData* jsonData = [jsonStr dataUsingEncoding:(NSUTF8StringEncoding)];
+</span></span><span style="display:flex;"><span>// 对比 data length
+</span></span><span style="display:flex;"><span>NSLog(@&#34;protoBufData: %ld&#34;, protoBufData.length);   // 43
+</span></span><span style="display:flex;"><span>NSLog(@&#34;jsonData: %ld&#34;, jsonData.length);           // 92
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
