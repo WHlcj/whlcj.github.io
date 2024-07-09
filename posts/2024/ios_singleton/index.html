@@ -217,7 +217,7 @@
 <li>唯一性：单例模式保证一个类只有一个实例。无论多少次请求这个实例，都返回相同的对象。</li>
 <li>全局访问点：单例实例可以通过一个全局访问点访问，通常是一个静态方法或属性。这使得在整个应用程序中可以方便地访问和共享单例实例。</li>
 <li>延迟实例化：单例模式通常使用延迟实例化，即在第一次访问实例时才创建它。这可以节省系统资源，尤其是在实例化过程比较昂贵的情况下。</li>
-<li>线程安全：在多线程环境中，单例模式必须确保线程安全，防止多个线程同时创建实例。通常使用同步机制（如 dispatch_once 在 Objective-C 中）来保证这一点。</li>
+<li>线程安全：在多线程环境中，单例模式必须确保线程安全，防止多个线程同时创建实例。通常使用同步机制（如<code>dispatch_once</code>在 Objective-C 中）来保证这一点。</li>
 </ul>
 <h2 id="单例模式的使用场景">单例模式的使用场景</h2>
 <p>    单例模式在需要确保一个类在应用程序中只有一个实例的场景下非常有用，例如配置管理、日志记录、网络管理、数据库连接、缓存管理等。使用单例模式可以控制实例数量，提供全局访问点，并实现延迟实例化。然而，使用单例模式时需要注意全局状态的引入、并发问题和生命周期管理等方面的潜在问题。根据具体的应用场景和需求，合理使用单例模式可以提高应用程序的设计质量和可维护性。</p>
@@ -231,7 +231,7 @@
 <li>设备信息：管理设备相关信息的类，例如设备唯一标识符、设备型号等。</li>
 </ol>
 <h2 id="swift-中的单例实现">Swift 中的单例实现</h2>
-<p>在 Swift 中，实现单例模式通常使用 static let 来创建单例实例。这种方法简单、线程安全，并且懒加载。</p>
+<p>在 Swift 中，实现单例模式通常使用<code>static let</code>来创建单例实例。这种方法简单、线程安全，并且懒加载。</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -258,12 +258,12 @@
 <p>解释</p>
 </blockquote>
 <ul>
-<li>static let shared = Singleton()：使用 static let 创建一个静态常量 shared，它持有 Singleton 类的唯一实例。静态常量是懒加载的，即在第一次访问时才会被初始化，并且是线程安全的。</li>
-<li>私有初始化方法：将初始化方法定义为私有，防止外部通过 init 方法创建新的实例。</li>
-<li>验证单例：使用 === 运算符检查两个引用是否指向同一个实例。</li>
+<li><code>static let shared = Singleton()</code>使用<code>static let</code>创建一个静态常量<code>shared</code>，它持有<code>Singleton</code>类的唯一实例。静态常量是懒加载的，即在第一次访问时才会被初始化，并且是线程安全的。</li>
+<li>私有初始化方法：将初始化方法定义为私有，防止外部通过<code>init</code>方法创建新的实例。</li>
+<li>验证单例：使用<code>===</code>运算符检查两个引用是否指向同一个实例。</li>
 </ul>
 <h2 id="objective-c-中的单例实现">Objective-C 中的单例实现</h2>
-<p>在 Objective-C 中，单例模式通常使用静态变量和 dispatch_once 函数来确保线程安全和实例唯一性。</p>
+<p>在 Objective-C 中，单例模式通常使用静态变量和<code>dispatch_once</code>函数来确保线程安全和实例唯一性。</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -310,13 +310,13 @@
 <p>解释</p>
 </blockquote>
 <ul>
-<li>静态变量 sharedInstance：static Singleton *sharedInstance = nil; 声明了一个静态变量，用于存储单例实例。</li>
-<li>dispatch_once：使用 dispatch_once 确保 sharedInstance 只被初始化一次，这是线程安全的。</li>
-<li>私有初始化方法：将初始化方法定义为私有，防止外部通过 init 方法创建新的实例。</li>
+<li>静态变量<code>sharedInstance ：static Singleton *sharedInstance = nil;</code> 声明了一个静态变量，用于存储单例实例。</li>
+<li><code>dispatch_once</code>：使用<code>dispatch_once</code>确保<code>sharedInstance</code>只被初始化一次，这是线程安全的。</li>
+<li>私有初始化方法：将初始化方法定义为私有，防止外部通过<code>init</code>方法创建新的实例。</li>
 </ul>
 <h2 id="swift-与-objective-c-实现单例的对比">Swift 与 Objective-C 实现单例的对比</h2>
 <p><img src="/imgs/2024/ios_singleton/1.png" alt=""></p>
-<p>Swift 中只需要使用静态变量（static let）就可以实现单例模式，这是因为 Swift 保证了静态变量的线程安全和一次性初始化。这使得单例实现更加简洁且易于维护，而不需要像 Objective-C 那样使用 dispatch_once 来确保线程安全和唯一性。</p>
+<p>Swift 中只需要使用静态变量（<code>static let</code>）就可以实现单例模式，这是因为 Swift 保证了静态变量的线程安全和一次性初始化。这使得单例实现更加简洁且易于维护，而不需要像 Objective-C 那样使用<code>dispatch_once</code>来确保线程安全和唯一性。</p>
 <p>终～</p>
       </article>
     </section>
