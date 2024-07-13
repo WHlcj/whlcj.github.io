@@ -483,13 +483,13 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// 创建具有 User Initiated 级别的 QoS 的并发队列
-</span></span><span style="display:flex;"><span>dispatch_queue_attr_t myAttr = dispatch_queue_attr_make_with_qos_class(QOS_CLASS_USER_INITIATED, QOS_CLASS_DEFAULT, 0);
-</span></span><span style="display:flex;"><span>dispatch_queue_t concurrentQueue = dispatch_queue_create(&#34;com.example.myconcurrent&#34;, myAttr);
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Objective-C" data-lang="Objective-C"><span style="display:flex;"><span><span style="color:#6272a4">// 创建具有 User Initiated 级别的 QoS 的并发队列
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_queue_attr_t myAttr <span style="color:#ff79c6">=</span> dispatch_queue_attr_make_with_qos_class(QOS_CLASS_USER_INITIATED, QOS_CLASS_DEFAULT, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>dispatch_queue_t concurrentQueue <span style="color:#ff79c6">=</span> dispatch_queue_create(<span style="color:#f1fa8c">&#34;com.example.myconcurrent&#34;</span>, myAttr);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 向 Background 级别的 QoS 的全局队列提交任务
-</span></span><span style="display:flex;"><span>dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-</span></span><span style="display:flex;"><span>    NSLog(@&#34;Task is executing&#34;);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 向 Background 级别的 QoS 的全局队列提交任务
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, <span style="color:#bd93f9">0</span>), <span style="color:#ff79c6">^</span>{
+</span></span><span style="display:flex;"><span>    NSLog(<span style="color:#f1fa8c">@&#34;Task is executing&#34;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></td></tr></table>
 </div>
@@ -550,25 +550,25 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// 创建一个 DispatchWorkItem
-</span></span><span style="display:flex;"><span>let workItem = DispatchWorkItem {
-</span></span><span style="display:flex;"><span>    print(&#34;Work item is executing&#34;)
-</span></span><span style="display:flex;"><span>    Thread.sleep(forTimeInterval: 2) // 模拟耗时任务
-</span></span><span style="display:flex;"><span>    print(&#34;Work item finished&#34;)
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Swift" data-lang="Swift"><span style="display:flex;"><span><span style="color:#6272a4">// 创建一个 DispatchWorkItem</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#8be9fd;font-style:italic">workItem</span> = DispatchWorkItem {
+</span></span><span style="display:flex;"><span>    print(<span style="color:#f1fa8c">&#34;Work item is executing&#34;</span>)
+</span></span><span style="display:flex;"><span>    Thread.sleep(forTimeInterval: <span style="color:#bd93f9">2</span>) <span style="color:#6272a4">// 模拟耗时任务</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#f1fa8c">&#34;Work item finished&#34;</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 提交任务到全局并发队列
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 提交任务到全局并发队列</span>
 </span></span><span style="display:flex;"><span>DispatchQueue.global().async(execute: workItem)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 取消任务
-</span></span><span style="display:flex;"><span>DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 取消任务</span>
+</span></span><span style="display:flex;"><span>DispatchQueue.global().asyncAfter(deadline: .now() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>) {
 </span></span><span style="display:flex;"><span>    workItem.cancel()
-</span></span><span style="display:flex;"><span>    print(&#34;Work item cancel requested&#34;)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#f1fa8c">&#34;Work item cancel requested&#34;</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 设置完成后的通知回调
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 设置完成后的通知回调</span>
 </span></span><span style="display:flex;"><span>workItem.notify(queue: DispatchQueue.main) {
-</span></span><span style="display:flex;"><span>    print(&#34;Work item has completed or was cancelled&#34;)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#f1fa8c">&#34;Work item has completed or was cancelled&#34;</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -597,25 +597,25 @@
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// 创建一个 dispatch_block_t
-</span></span><span style="display:flex;"><span>dispatch_block_t block = dispatch_block_create(0, ^{
-</span></span><span style="display:flex;"><span>    NSLog(@&#34;Block is executing&#34;);
-</span></span><span style="display:flex;"><span>    [NSThread sleepForTimeInterval:2]; // 模拟耗时任务
-</span></span><span style="display:flex;"><span>    NSLog(@&#34;Block finished&#34;);
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Objective-C" data-lang="Objective-C"><span style="display:flex;"><span><span style="color:#6272a4">// 创建一个 dispatch_block_t
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_block_t block <span style="color:#ff79c6">=</span> dispatch_block_create(<span style="color:#bd93f9">0</span>, <span style="color:#ff79c6">^</span>{
+</span></span><span style="display:flex;"><span>    NSLog(<span style="color:#f1fa8c">@&#34;Block is executing&#34;</span>);
+</span></span><span style="display:flex;"><span>    [NSThread <span style="color:#8be9fd;font-style:italic">sleepForTimeInterval</span>:<span style="color:#bd93f9">2</span>]; <span style="color:#6272a4">// 模拟耗时任务
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    NSLog(<span style="color:#f1fa8c">@&#34;Block finished&#34;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 提交任务到全局并发队列
-</span></span><span style="display:flex;"><span>dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 提交任务到全局并发队列
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span style="color:#bd93f9">0</span>), block);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 延迟1秒后取消任务
-</span></span><span style="display:flex;"><span>dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 延迟1秒后取消任务
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">*</span> NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span style="color:#bd93f9">0</span>), <span style="color:#ff79c6">^</span>{
 </span></span><span style="display:flex;"><span>    dispatch_block_cancel(block);
-</span></span><span style="display:flex;"><span>    NSLog(@&#34;Block cancel requested&#34;);
+</span></span><span style="display:flex;"><span>    NSLog(<span style="color:#f1fa8c">@&#34;Block cancel requested&#34;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 设置完成后的通知回调
-</span></span><span style="display:flex;"><span>dispatch_block_notify(block, dispatch_get_main_queue(), ^{
-</span></span><span style="display:flex;"><span>    NSLog(@&#34;Block has completed or was cancelled&#34;);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 设置完成后的通知回调
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>dispatch_block_notify(block, dispatch_get_main_queue(), <span style="color:#ff79c6">^</span>{
+</span></span><span style="display:flex;"><span>    NSLog(<span style="color:#f1fa8c">@&#34;Block has completed or was cancelled&#34;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></td></tr></table>
 </div>
