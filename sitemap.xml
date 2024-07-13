@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://whlcj.github.io/posts/2024/mach_o_type/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
     <loc>https://whlcj.github.io/categories/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/ios/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/posts/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/tags/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/tags/xcode/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/</loc>
+    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/posts/2024/code_coverage/</loc>
     <lastmod>2024-07-11T00:16:47+08:00</lastmod>
   </url><url>
-    <loc>https://whlcj.github.io/posts/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/tags/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
-  </url><url>
     <loc>https://whlcj.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2024-07-11T00:16:47+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/</loc>
     <lastmod>2024-07-11T00:16:47+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/gcd/</loc>
@@ -60,9 +66,6 @@
     <lastmod>2024-01-29T15:22:51+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/posts/2023/xcode_certsigning/</loc>
-    <lastmod>2023-12-17T21:15:16+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/tags/xcode/</loc>
     <lastmod>2023-12-17T21:15:16+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/git/</loc>

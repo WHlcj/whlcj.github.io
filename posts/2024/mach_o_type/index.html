@@ -24,7 +24,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Posts | 来自缤纷多彩的灰</title>
+    <title>Behind The Xcode -- Mach-O Type | 来自缤纷多彩的灰</title>
 
     
 
@@ -33,26 +33,29 @@
 
 
 <meta name="author" content="WHlcj" />
-<meta name="description" content="" />
+<meta name="description" content="因为好奇 Xcode 中不同 Target 的图标，才进一步了解了 Mach-O Type 最后发现，不同不图标只是不同的文件格式。跟 Mach-O Type 关系不大hhh
+" />
 
 
 
 <meta name="generator" content="Hugo 0.105.0">
 
-<link rel="canonical" href="https://whlcj.github.io/posts/" />
+<link rel="canonical" href="https://whlcj.github.io/posts/2024/mach_o_type/" />
 
 
-<meta property="og:title" content="Posts" />
-<meta property="og:description" content="白夜之光" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://whlcj.github.io/posts/" />
+<meta property="og:title" content="Behind The Xcode -- Mach-O Type" />
+<meta property="og:description" content="因为好奇 Xcode 中不同 Target 的图标，才进一步了解了 Mach-O Type 最后发现，不同不图标只是不同的文件格式。跟 Mach-O Type 关系不大hhh" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whlcj.github.io/posts/2024/mach_o_type/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-13T14:43:37+08:00" />
+<meta property="article:modified_time" content="2024-07-13T14:43:37+08:00" />
 
 
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="白夜之光"/>
+<meta name="twitter:title" content="Behind The Xcode -- Mach-O Type"/>
+<meta name="twitter:description" content="因为好奇 Xcode 中不同 Target 的图标，才进一步了解了 Mach-O Type 最后发现，不同不图标只是不同的文件格式。跟 Mach-O Type 关系不大hhh"/>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -89,7 +92,15 @@
 </style>
 
 
-     
+    
+
+
+
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+
+
 
     
     <link rel="stylesheet" href="/css/custom.css" />
@@ -125,457 +136,149 @@
         <section class="front" >
           <div class="dream-max-width" >
             
-
-
-
-
-
-<header class="ui basic very padded segment dream-header">
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
 
   
-  <div class="ui small circular image">
-    <img src="/img/me.jpg" alt="avatar" />
-  </div>
-  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
     
 
-  <div class="content">
-    <h1 class="ui medium header">WHlcj的个人博客：<span class="sub header">仍想在这颗心脏跳动的时间内守护你！</span>
-    </h1>
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-mach-o-type">什么是 Mach-O Type</a></li>
+    <li><a href="#常见的-mach-o-type">常见的 Mach-O Type</a></li>
+    <li><a href="#在-xcode-中设置-mach-o-type">在 Xcode 中设置 Mach-O Type</a></li>
+  </ul>
+</nav>
+    </div>
+    
 
-    <article class="ui horizontal list">
-      
-      <a class="item" href="/posts">
-        <i class="archive icon" title="归档"></i>
-      </a>
-      
-      <a class="item" href="/categories">
-        <i class="th list icon" title="所有分类"></i>
-      </a>
-      <a class="item" href="/tags">
-        <i class="tags icon" title="所有标签"></i>
-      </a>
+
+    
+    <div class="ui segment">
+  <button
+    class="ui circular icon button save-as-image"
+    title="保存为图片"
+    onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </button>
+  <a href="https://twitter.com/intent/tweet?text=Behind%20The%20Xcode%20--%20Mach-O%20Type&url=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fmach_o_type%2f" class="ui circular twitter icon button">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwhlcj.github.io%2fposts%2f2024%2fmach_o_type%2f" class="ui circular facebook icon button">
+    <i class="facebook icon"></i>
+  </a>
+</div>
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+
+
+        <h1 class="ui large header">Behind The Xcode -- Mach-O Type<span class="sub header">
+            <span class="left">
+              @
+              
+                
+                  WHlcj
+                
+              
+
+              | 
+                  <span data-format="luxon">2024-07-13T14:43:37&#43;08:00</span>
+                
+
+              | 2 分钟阅读
+
+              
+            </span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>因为好奇 Xcode 中不同 Target 的图标，才进一步了解了 Mach-O Type 最后发现，不同不图标只是不同的文件格式。跟 Mach-O Type 关系不大hhh</p>
+<h2 id="什么是-mach-o-type">什么是 Mach-O Type</h2>
+<p>在 Xcode 中，<code>Mach-O（Mach Object）Type</code> 定义了目标的二进制文件类型，包括可执行文件、动态库、静态库、插件包和目标文件。Mach-O 文件类型决定了文件在系统中的作用和如何被加载和执行。所以正确设置 <code>Mach-O Type</code> 对于确保应用程序和库的正确构建、链接和执行至关重要。</p>
+<h2 id="常见的-mach-o-type">常见的 Mach-O Type</h2>
+<blockquote>
+<p><strong>Executable（可执行文件）</strong>：</p>
+</blockquote>
+<ul>
+<li><strong>说明</strong>：这是一个独立的可执行文件，可以直接在操作系统中运行。应用程序的主要二进制文件通常是这种类型。</li>
+<li><strong>用途</strong>：应用程序的主要可执行文件。</li>
+</ul>
+<blockquote>
+<p><strong>Dynamic Library（动态库）</strong>：</p>
+</blockquote>
+<ul>
+<li><strong>说明</strong>：这是一个动态共享库，可以在运行时被其他可执行文件或动态库加载和使用。</li>
+<li><strong>用途</strong>：动态库（如<code>.framework</code>或<code>.dylib</code>文件），在运行时被其他应用程序或库使用。</li>
+</ul>
+<blockquote>
+<p><strong>Static Library（静态库）</strong>：</p>
+</blockquote>
+<ul>
+<li><strong>说明</strong>：这是一个静态库，在编译时被链接到可执行文件中。静态库的代码会在链接时复制到最终的可执行文件中。</li>
+<li><strong>用途</strong>：静态库（如<code>.a</code>文件），在编译时链接到应用程序中。</li>
+</ul>
+<blockquote>
+<p><strong>Bundle</strong>：</p>
+</blockquote>
+<ul>
+<li><strong>说明</strong>：这是一个动态加载的插件，可以在运行时被应用程序或其他库加载。与动态库类似，但通常用于插件。</li>
+<li><strong>用途</strong>：插件或资源包，通常用于扩展应用程序的功能。</li>
+</ul>
+<blockquote>
+<p><strong>Relocatable Object File（可重定位目标文件）</strong>：</p>
+</blockquote>
+<ul>
+<li><strong>说明</strong>：这是一个中间文件，通常是编译源代码后生成的，可以被链接成可执行文件或静态库。</li>
+<li><strong>用途</strong>：目标文件，在链接阶段生成最终的二进制文件。</li>
+</ul>
+<h2 id="在-xcode-中设置-mach-o-type">在 Xcode 中设置 Mach-O Type</h2>
+<p>在 Xcode中，可以通过以下步骤设置或查看一个目标的 <code>Mach-O Type</code>：</p>
+<ol>
+<li>打开 Xcode 项目。</li>
+<li>选择项目导航器中的目标（Target）。</li>
+<li>选择顶部的&quot;<code>Build Settings</code>&ldquo;选项卡。</li>
+<li>在&rdquo;<code>Build Settings</code>&ldquo;中，搜索&rdquo;<code>Mach-O Type</code>&quot;。</li>
+<li>你将看到一个名为“<code>Mach-O Type</code>”的设置项，可以在这里选择和修改目标的 Mach-O 文件类型。</li>
+</ol>
+<p><img src="/imgs/2024/mach_o_type/1.png" alt=""></p>
+      </article>
+    </section>
+
+    
+
+    
+
+    
+    <article class="ui segment" data-html2canvas-ignore>
+      <div id="vcomments"></div>
     </article>
 
-    
-    
-    
-    
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-    
-
-    
-
-    
-    
-    
-          <div class="dream-tags">
-          
-          
-          
-            <a class="ui label" href="/tags/cccc/" title="cccc">
-              cccc
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/cocoapods/" title="cocoapods">
-              cocoapods
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/gcd/" title="GCD">
-              GCD
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/git/" title="git">
-              git
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/github/" title="github">
-              github
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/hackathon/" title="Hackathon">
-              Hackathon
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/hugo/" title="hugo">
-              hugo
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/ios/" title="iOS">
-              iOS
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/jdbc/" title="JDBC">
-              JDBC
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/linux/" title="linux">
-              linux
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/macos/" title="MacOS">
-              MacOS
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/mysql/" title="MySQL">
-              MySQL
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/protobuf/" title="protobuf">
-              protobuf
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/python/" title="python">
-              python
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/ubuntu/" title="ubuntu">
-              ubuntu
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/wwdc/" title="wwdc">
-              wwdc
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/xcode/" title="Xcode">
-              Xcode
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87/" title="代码覆盖率">
-              代码覆盖率
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E4%BB%BF%E9%80%A0%E5%93%81/" title="仿造品">
-              仿造品
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">
-              大数据
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E5%AD%97%E7%AC%A6%E7%94%BB/" title="字符画">
-              字符画
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E5%AE%9E%E4%B9%A0/" title="实习">
-              实习
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/" title="生活随想">
-              生活随想
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E8%AF%8D%E4%BA%91/" title="词云">
-              词云
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E9%9A%8F%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81/" title="随机验证码">
-              随机验证码
-            </a>
-          
-          
-          
-            <a class="ui label" href="/tags/%E9%9D%A2%E8%AF%95/" title="面试">
-              面试
-            </a>
-          
-          </div>
-    
-
+    <script>
+      new Valine({
+        el: '#vcomments',
+        appId: "yeRQHnHdFk6GhrWqd63YieI4-gzGzoHsz",
+        appKey: "9qXtLq5TQPxvkkFmoWAPEMRH",
+        lang: ""
+      })
+    </script>
     
   </div>
-</header>
-
-
-<div class="ui container">
-  <article class="ui segment dream-posts-section">
-    <h2 class="ui header">
-      Posts
-      <span class="ui grey sub header"></span>
-    </h2>
-
-    
-    <h3 class="ui header">2024</h3>
-    <ul>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/mach_o_type/">Behind The Xcode -- Mach-O Type</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/code_coverage/">iOS Code Coverage -- 原理和技术</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/ios_gcd_introduction/">iOS 多线程 -- GCD 入门篇</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/ios_singleton/">聊聊 iOS 中的单例</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/ios_protobuf/">快速上手 iOS Protocol Buffer</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/study_cocoapods_1/">CocoaPods 自学笔记 -- 基础篇</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2024/start_2024/">启 2024</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/url_scheme_course/">URL Scheme 的介绍和使用</a>
-      </li>
-      
-    </ul>
-    
-    <h3 class="ui header">2023</h3>
-    <ul>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/xcode_certsigning/">Behind The Xcode -- iOS 签名机制</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/study_git_2/">Git学习笔记 -- 实战篇</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/practice/">如何找到一份不错的实习</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/appletalentopenday/">Apple China R&amp;D Talent Open Day</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/half_2023/">步入2023下</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/cccc_three/">CCCC竞赛(三)</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/paintdemo/">SwiftUI实现画板功能</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/xcode_to_appstore/">Xcode打包App分发提交问题汇总</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/summary_of_git_issues/">遇到的git问题汇总</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/cccc_two/">CCCC竞赛（二）</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/navigationstack_guide/">SwiftUI NavigationStack Guide</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/deal_hex_color/">SwiftUI处理十六进制颜色</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/fontfamily_to_project/">iOS项目中添加外部字体</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/wwdc_night/">2023WWDC之夜(北京场)</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/ios_hackathon/">iOS_Hackathon</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/wwdc/">WWDC竞赛（一）</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/cccc_one/">CCCC竞赛（一）</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/2022/">启2023</a>
-      </li>
-      
-    </ul>
-    
-    <h3 class="ui header">2022</h3>
-    <ul>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/study_git_1/">Git学习笔记 -- 理论篇</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/relection_of_bigdata/">《大数据时代》读后感</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2023/begin_with_ios/">iOS开发入门</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/jet_with_macos/">MacOS破解jet全家桶遇到的问题及解决</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/study_note_of_jdbc/">JDBC学习笔记</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/study_note_of_mysql/">MySQL学习笔记</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/half_summary_of_2022/">2022上半年总结</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/python_projects/">三个Python进阶有趣项目详解</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/study_note_of_python/">Python学习笔记</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/ubuntu20.04_change_linux.core/">Ubuntu20.04更换Linux内核</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/me_imitation/">我，仿造品</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/2022/summary_of_2021/">我的2021年度总结</a>
-      </li>
-      
-    </ul>
-    
-    <h3 class="ui header">2021</h3>
-    <ul>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/historical_modification/">Historical_modification</a>
-      </li>
-      
-      <li>
-        <a href="https://whlcj.github.io/posts/hello_world/">我的第一篇博客！</a>
-      </li>
-      
-    </ul>
-    
-  </article>
 </div>
 
 
@@ -985,7 +688,32 @@
 <script src="/js/main.js"></script>
 <script src="/js/theme.js"></script>
 
-     
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
 
     
     <script src="/js/custom.js"></script>
