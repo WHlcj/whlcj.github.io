@@ -2,28 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://whlcj.github.io/categories/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/posts/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/tags/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/posts/2025/autumn_recruitment/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/tags/%E6%A0%A1%E6%8B%9B/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
+    <loc>https://whlcj.github.io/categories/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2025-01-02T18:02:16+08:00</lastmod>
+  </url><url>
     <loc>https://whlcj.github.io/posts/2024/mach_o_type/</loc>
     <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
-    <loc>https://whlcj.github.io/categories/</loc>
-    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
-  </url><url>
     <loc>https://whlcj.github.io/tags/ios/</loc>
-    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/posts/</loc>
-    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/tags/</loc>
     <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/xcode/</loc>
     <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2024-07-13T14:43:37+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/</loc>
     <lastmod>2024-07-13T14:43:37+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/posts/2024/code_coverage/</loc>
@@ -57,9 +66,6 @@
     <lastmod>2024-03-09T23:12:21+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/</loc>
-    <lastmod>2024-03-09T23:12:21+08:00</lastmod>
-  </url><url>
-    <loc>https://whlcj.github.io/categories/%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2024-03-09T23:12:21+08:00</lastmod>
   </url><url>
     <loc>https://whlcj.github.io/posts/2023/url_scheme_course/</loc>
